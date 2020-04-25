@@ -4,13 +4,18 @@
   "description": "- Home page\r - Login\r - Sign up\r - Profile\r - Introduce",
   "main": "index.js",
   "scripts": {
+    "dev": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lio Aslan (leoalan5577@gmail.com)",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
     "next": "^9.3.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
   }
 }
