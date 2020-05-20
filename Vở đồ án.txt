@@ -1,0 +1,40 @@
+Người dùng: xác định có bao nhiêu người dùng, người dùng nào là chính
+Đứng trên phương diện người dùng xác định hệ thống cung cấp cho mình những gì
+27/3 review lại báo cáo và chấm điểm lại
+Coi lại format của báo cáo
+nên dùng gg drive update, thiếu phần số 2/ mục số 2 con cu xinh xinh
+-----------------
+4 loại jdbc driver
+loại 1: jdbc sử dụng cầu nối odbc
+loại 2: jdbc kết nối trực tiếp với các trình điều khiển
+	loại này cho phép jdbc giao tiếp trự tiếp với các driver hay các hàm API của 
+loại 3: jdbc kết nối thông qua các ứng dụng mạng trung gian
+loại 4: jdbc kết nối thông qua các trình điều khiển đặc thù ở xa
+
+các bước để kết nối cơ sở dữ liệu:
+	nạp trình điều khiển
+	tạo thông tin kết nối và đối tượng Connection
+	tạo đối tượng Statement để thực thi các lệnh truy vấn
+	xử lý dữ liệu
+	đóng kết nối
+
+step	description		use				methods
+1	Load JDBC Driver	java.Lang.Class			forName(...)
+------------------------------------------------------------------------------------
+2	Establish a DB		java.sql.Connection		DriverManager
+	connection		java.sql.DriverManager		getConnection(...)->Connection
+------------------------------------------------------------------------------------
+3	Create & execute	java.sql.Statement		execute(...)
+				java.sql.PrepareStatement	executeQuery(...) 
+				java.sql.CallableStatement	SELECT
+								executeUpdate(...) 
+								INSERT/UPDATE/DELETE
+-------------------------------------------------------------------------------------
+4	Process the		java.sql.ResultSet		first(), last(), next(),
+	results							previous()
+								getXXX(..)									
+-------------------------------------------------------------------------------------
+5	close			ResultSet, Statement,		close()
+				Connection															
+----------->>>serverport 1433
+
