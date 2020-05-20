@@ -12,7 +12,7 @@ const styles = (theme) => ({
         padding: "0px 15px",
         height: "100%",
         color: "#001924",
-        fontSize: 15,
+        fontSize: 12,
         fontFamily: "Roboto Slab",
         "&:hover": {
             backgroundColor: "#EBEBF2",
@@ -34,14 +34,14 @@ const RightOption = (props) => {
             className={classes.rightOption}
         >
             <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>Log in</Hidden>
+                <Hidden xsDown>LOG IN</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
             </ButtonBase>
 
             <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>Sign up</Hidden>
+                <Hidden xsDown>SIGN UP</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>

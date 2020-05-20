@@ -18,11 +18,11 @@ const styles = (theme) => ({
 });
 
 const Navbar = (props) => {
-    const { classes } = props;
+    const { classes, page } = props;
     return (
         <AppBar position="fixed" className={classes.appbar}>
             <div className={classes.navbar}>
-                <LeftOption />
+                <LeftOption page={page} />
                 <RightOption />
             </div>
         </AppBar>

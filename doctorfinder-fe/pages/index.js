@@ -4,7 +4,7 @@ import SearchPage from '../components/searchPage';
 
 const Index = () => {
     return (
-        <Layout>
+        <Layout page="search">
             <SearchPage />
         </Layout>
     );

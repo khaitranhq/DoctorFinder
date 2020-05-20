@@ -27,21 +27,27 @@ const styles = (theme) => ({
         fontSize: 20,
         fontWeight: 800,
     },
-    specialtyInput: {
-        background: "#fff",
+    autocomplete: {
+        background: "#FFF",
+        borderRadius: 5,
+        width: 236,
+        height: 52,
+    },
+    txtField: {
+        background: "#FFF",
         borderRadius: 5,
         width: 236,
         height: 52,
     },
     wrapInput: {
         marginTop: 30,
-        marginBottom: 6
+        marginBottom: 6,
     },
     btn: {
         background: "#3163C1",
         width: 100,
-        height: 40
-    }
+        height: 40,
+    },
 });
 
 const specialties = [{ title: "DFSDF", year: 1994 }];
@@ -72,7 +78,13 @@ const Element1 = (props) => {
                             Find the best right fit doctor for you
                         </label>
                     </Grid>
-                    <Grid item container justify="center" spacing={2} className={classes.wrapInput}>
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        spacing={2}
+                        className={classes.wrapInput}
+                    >
                         <Grid item>
                             <Autocomplete
                                 options={specialties.map(
@@ -85,7 +97,7 @@ const Element1 = (props) => {
                                         margin="normal"
                                         variant="outlined"
                                         InputProps={{
-                                            className: classes.specialtyInput,
+                                            className: classes.autocomplete,
                                         }}
                                     />
                                 )}
@@ -99,37 +111,33 @@ const Element1 = (props) => {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        label="Specialty"
+                                        label="City"
                                         margin="normal"
                                         variant="outlined"
                                         InputProps={{
-                                            className: classes.specialtyInput,
+                                            className: classes.autocomplete,
                                         }}
                                     />
                                 )}
                             />
                         </Grid>
                         <Grid item>
-                            <Autocomplete
-                                options={specialties.map(
-                                    (option) => option.title
-                                )}
-                                renderInput={(params) => (
-                                    <TextField
-                                        {...params}
-                                        label="Specialty"
-                                        margin="normal"
-                                        variant="outlined"
-                                        InputProps={{
-                                            className: classes.specialtyInput,
-                                        }}
-                                    />
-                                )}
+                            <TextField
+                                label="Name"
+                                margin="normal"
+                                variant="outlined"
+                                InputProps={{
+                                    className: classes.txtField,
+                                }}
                             />
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" color="primary" className={classes.btn}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.btn}
+                        >
                             Search
                         </Button>
                     </Grid>
