@@ -1,13 +1,13 @@
-package com.doctorfinder.api;
+package com.leoaslan.doctorfinder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiApplication {
+public class DoctorfinderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
+		SpringApplication.run(DoctorfinderApplication.class, args);
 	}
 
 }
