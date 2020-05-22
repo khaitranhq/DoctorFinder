@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonBase, Hidden, Box, withStyles } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
+import clsx from "clsx";
 
 const styles = (theme) => ({
     rightOption: {
@@ -22,6 +23,9 @@ const styles = (theme) => ({
             fontSize: 10,
         },
     },
+    marginRight: {
+        marginRight: 20,
+    },
 });
 
 const RightOption = (props) => {
@@ -40,7 +44,7 @@ const RightOption = (props) => {
                 </Hidden>
             </ButtonBase>
 
-            <ButtonBase className={classes.titleBtn}>
+            <ButtonBase className={clsx(classes.titleBtn, classes.marginRight)}>
                 <Hidden xsDown>SIGN UP</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
