@@ -10,10 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Specialty")
+@Table(name="Specialties")
 public class Specialty {
     @Id
     @GeneratedValue
