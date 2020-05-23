@@ -1,4 +1,4 @@
-package com.leoaslan.doctorfinder.models;
+package com.leoaslan.docfind.model;
 
 import java.util.Date;
 
@@ -17,7 +17,7 @@ import lombok.NonNull;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="UserAccounts")
+@Table(schema = "dbo", name="UserAccounts")
 public class UserAccount {
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class UserAccount {
     @OneToOne
     @JoinColumn(name="userTypeID")
     private @NonNull UserType userType;
-    
+
     private Date birthDate;
     private String avatarFileName;
 
@@ -38,7 +38,7 @@ public class UserAccount {
     private String city;
     private Boolean gender;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name="specialtyID")
-    private Specialty specialty; 
+    private Specialty specialty;
 }

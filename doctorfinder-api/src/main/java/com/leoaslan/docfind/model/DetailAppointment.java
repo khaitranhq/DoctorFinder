@@ -1,4 +1,4 @@
-package com.leoaslan.doctorfinder.models;
+package com.leoaslan.docfind.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

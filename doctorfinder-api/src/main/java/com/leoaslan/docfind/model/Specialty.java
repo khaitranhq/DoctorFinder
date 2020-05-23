@@ -1,7 +1,8 @@
-package com.leoaslan.doctorfinder.models;
+package com.leoaslan.docfind.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +12,11 @@ import javax.persistence.Table;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="UserTypes")
-public class UserType {
+@Table(name="Specialties")
+public class Specialty {
     @Id
     @GeneratedValue
-    private int userTypeID;
+    private int specialtyID;
 
-    private String userTypeName;
+    private String specialtyName;
 }

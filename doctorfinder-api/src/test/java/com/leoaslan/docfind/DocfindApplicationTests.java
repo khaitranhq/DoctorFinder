@@ -1,10 +1,10 @@
-package com.leoaslan.doctorfinder;
+package com.leoaslan.docfind;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DoctorfinderApplicationTests {
+class DocfindApplicationTests {
 
 	@Test
 	void contextLoads() {
