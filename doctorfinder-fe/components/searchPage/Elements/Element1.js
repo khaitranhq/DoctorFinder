@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, withStyles, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import { request, GET_DOCTORS_API } from "../../../src/utils/apiRequest";
 
 const styles = (theme) => ({
     img: {
@@ -18,13 +19,13 @@ const styles = (theme) => ({
         font: "",
     },
     bigTitle: {
-        fontFamily: "Roboto",
-        fontSize: 50,
+        fontFamily: "Philosopher",
+        fontSize: 35,
         fontWeight: 800,
     },
     smallTitle: {
-        fontFamily: "Roboto",
-        fontSize: 20,
+        fontFamily: "Philosopher",
+        fontSize: 15,
         fontWeight: 800,
     },
     autocomplete: {
@@ -53,7 +54,12 @@ const styles = (theme) => ({
 const specialties = [{ title: "DFSDF", year: 1994 }];
 
 const Element1 = (props) => {
-    const { classes } = props;
+    const { classes, onSubmit } = props;
+
+    const [doctorSpecialty, setDoctorSpecialty] = useState("");
+    const [doctorCity, setDoctorCity] = useState("");
+    const [doctorName, setDoctorName] = useState("");
+
     return (
         <div className={classes.root}>
             <img
@@ -70,12 +76,13 @@ const Element1 = (props) => {
                 >
                     <Grid item>
                         <label className={classes.bigTitle}>
-                            Find The Best Doctor
+                            Bạn Cần Tư Vấn Về Sức Khỏe?
                         </label>
                     </Grid>
                     <Grid item>
                         <label className={classes.smallTitle}>
-                            Find the best right fit doctor for you
+                            Hãy để chúng tôi giúp bạn giảm thời gian chờ ở bệnh
+                            viện
                         </label>
                     </Grid>
                     <Grid
@@ -96,6 +103,9 @@ const Element1 = (props) => {
                                         label="Specialty"
                                         margin="normal"
                                         variant="outlined"
+                                        onChange={(e) =>
+                                            setDoctorSpecialty(e.target.value)
+                                        }
                                         InputProps={{
                                             className: classes.autocomplete,
                                         }}
@@ -114,6 +124,9 @@ const Element1 = (props) => {
                                         label="City"
                                         margin="normal"
                                         variant="outlined"
+                                        onChange={(e) =>
+                                            setDoctorCity(e.target.value)
+                                        }
                                         InputProps={{
                                             className: classes.autocomplete,
                                         }}
@@ -126,6 +139,7 @@ const Element1 = (props) => {
                                 label="Name"
                                 margin="normal"
                                 variant="outlined"
+                                onChange={(e) => setDoctorName(e.target.value)}
                                 InputProps={{
                                     className: classes.txtField,
                                 }}
@@ -136,6 +150,13 @@ const Element1 = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
+                            onClick={async () =>
+                                await onSubmit(
+                                    doctorSpecialty,
+                                    doctorCity,
+                                    doctorName
+                                )
+                            }
                             className={classes.btn}
                         >
                             Search
@@ -145,6 +166,10 @@ const Element1 = (props) => {
             </div>
         </div>
     );
+};
+
+Element1.getInitialProps = async (ctx) => {
+    
 };
 
 export default withStyles(styles)(Element1);

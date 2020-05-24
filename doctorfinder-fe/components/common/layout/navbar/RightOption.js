@@ -38,14 +38,14 @@ const RightOption = (props) => {
             className={classes.rightOption}
         >
             <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>LOG IN</Hidden>
+                <Hidden xsDown>ĐĂNG NHẬP</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
             </ButtonBase>
 
             <ButtonBase className={clsx(classes.titleBtn, classes.marginRight)}>
-                <Hidden xsDown>SIGN UP</Hidden>
+                <Hidden xsDown>ĐĂNG KÍ</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>

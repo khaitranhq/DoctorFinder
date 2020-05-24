@@ -26,11 +26,9 @@ const styles = (theme) => ({
         },
     },
     bigTitle: {
-        fontWeight: "bold",
-        fontSize: theme.spacing(3),
-        fontFamily: "Orbitron",
+        fontFamily: "Faster One",
         [theme.breakpoints.down("lg")]: {
-            fontSize: theme.spacing(3),
+            fontSize: theme.spacing(4),
         },
         [theme.breakpoints.down("md")]: {
             fontSize: theme.spacing(2.4),

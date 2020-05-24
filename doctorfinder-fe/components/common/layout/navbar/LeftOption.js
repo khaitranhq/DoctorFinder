@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonBase, Hidden, Box, withStyles } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 const styles = (theme) => ({
     leftOption: {
@@ -34,12 +34,28 @@ const styles = (theme) => ({
         },
     },
     borderBottom: {
-        borderBottom: "solid 5px #C4212A"
-    }
+        borderBottom: "solid 5px #C4212A",
+    },
 });
 
 const LeftOption = (props) => {
     const { classes, page } = props;
+
+    const pageTitles = [
+        {
+            label: "TRANG CHỦ",
+            title: "home",
+        },
+        {
+            label: "GIỚI THIỆU",
+            title: "about",
+        },
+        {
+            label: "LIÊN HỆ",
+            title: "contact",
+        },
+    ];
+
     return (
         <Box
             display="flex"
@@ -53,15 +69,19 @@ const LeftOption = (props) => {
                 </Hidden>
                 <Hidden smDown>DFINDER</Hidden>
             </ButtonBase>
-            <Hidden smDown>
-                <ButtonBase className={clsx(classes.titleBtn, page === "search" && classes.borderBottom)}>TRANG CHỦ</ButtonBase>
-            </Hidden>
-            <Hidden smDown>
-                <ButtonBase className={clsx(classes.titleBtn, page === "about" && classes.borderBottom)}>GIỚI THIỆU</ButtonBase>
-            </Hidden>
-            <Hidden smDown>
-                <ButtonBase className={clsx(classes.titleBtn, page === "contact" && classes.borderBottom)}>LIÊN HỆ</ButtonBase>
-            </Hidden>
+            {pageTitles.map((pageTitle, key) => (
+                <Hidden smDown key={key}>
+                    <ButtonBase
+                        className={clsx(
+                            classes.titleBtn,
+                            page === pageTitle.title && classes.borderBottom
+                        )}
+                    >
+                        {pageTitle.label}
+                    </ButtonBase>
+                </Hidden>
+            ))}
+            ;
         </Box>
     );
 };
