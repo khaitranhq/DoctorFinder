@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name="DetailAppointment")
 public class DetailAppointment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appointmentID;
 
     @OneToOne

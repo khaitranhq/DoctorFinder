@@ -13,20 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/auth")
 public class LoginController {
     private final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     LoginService loginService;
 
-    @GetMapping("/auth/login")
+    @GetMapping("/login")
     ResponseEntity<?> login(HttpServletRequest request) {
-         String email = request.getParameter("email");
-         String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-         Boolean isCorrectUser = loginService.validateUser(email, password);
-         if (isCorrectUser) return new ResponseEntity<>(HttpStatus.ACCEPTED);
-         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        Boolean isCorrectUser = loginService.validateUser(email, password);
+        if (isCorrectUser)
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
