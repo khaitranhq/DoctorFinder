@@ -2,6 +2,7 @@ package com.leoaslan.docfind.controller;
 
 import java.util.List;
 
+import com.leoaslan.docfind.model.City;
 import com.leoaslan.docfind.model.Specialty;
 import com.leoaslan.docfind.service.master.MasterService;
 
@@ -23,5 +24,11 @@ public class MasterController {
     List<Specialty> getSpecialty(){
         List<Specialty> listSpecialties = masterService.getSpecialty();
         return listSpecialties;
+    }
+
+    @GetMapping("/city")
+    List<City> getCity(){
+        List<City> listCity = masterService.getCiy();
+        return listCity;
     }
 }
