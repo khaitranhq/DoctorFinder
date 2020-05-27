@@ -30,11 +30,11 @@ public class UserAccount {
     @JoinColumn(name="userTypeID")
     private @NonNull UserType userType;
 
-    private Date birthDate;
+    private Date birthdate;
     private String avatarFileName;
 
     private @NonNull int phoneNumber;
-    private String city;
+    private int cityID;
     private Boolean gender;
 
     @OneToOne

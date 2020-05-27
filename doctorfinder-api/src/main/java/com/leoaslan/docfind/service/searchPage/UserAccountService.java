@@ -1,15 +1,11 @@
-package com.example.demo.service;
+package com.leoaslan.docfind.service.searchPage;
 
-import com.example.demo.model.UserAccount;
-import lombok.Getter;
+import com.leoaslan.docfind.model.UserAccount;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface UserAccountService {
-    //String getFullName();
-    //String getCity();
-    //String getSpecialtyID();
     List<UserAccount> ListUserAccount();
-    ResponseEntity<?> findDoctor(String FullName, String City, int SpecialtyID);
+    ResponseEntity<?> findDoctor(String FullName, int CityID, int SpecialtyID);
 }
