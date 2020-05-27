@@ -34,7 +34,10 @@ public class UserAccount {
     private String avatarFileName;
 
     private @NonNull int phoneNumber;
-    private String city;
+
+    @OneToOne
+    @JoinColumn(name="cityID")
+    private @NonNull City city;
     private Boolean gender;
 
     @OneToOne

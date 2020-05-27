@@ -1,12 +1,15 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import Element1 from "./Elements/Element1";
-import Element2 from "./Elements/Element3";
+import Element2 from "./Elements/Element2";
+import { DOCTORS_API } from "../../src/utils/apiRequest";
 
-const SearchPage = () => {
+const SearchPage = (props) => {
+    const { specialties, cities } = props;
+
     const handleSubmit = async (doctorSpecialty, doctorCity, doctorName) => {
         try {
-            const listDoctor = await request(GET_DOCTORS_API, "GET", {
+            const listDoctor = await request(DOCTORS_API, "GET", {
                 specialty: doctorSpecialty,
                 city: doctorCity,
                 name: doctorName,
@@ -19,8 +22,12 @@ const SearchPage = () => {
 
     return (
         <Grid>
-            <Element1 onSubmit={handleSubmit} />
-            <Element2 />
+            <Element1  />
+            <Element2
+                onSubmit={handleSubmit}
+                specialties={specialties}
+                cities={cities}
+            />
         </Grid>
     );
 };

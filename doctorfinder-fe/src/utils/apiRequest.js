@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "http://localhost:8080/api"
+const API = "http://localhost:3001"
 
 export const request = (url, method, payload = {}) => {
     return axios({
@@ -10,4 +10,6 @@ export const request = (url, method, payload = {}) => {
     });
 };
 
-export const GET_DOCTORS_API = "/doctors";
+export const DOCTORS_API = "/doctors";
+export const MASTER_SPECIALTY_API = "/master/specialty";
+export const MASTER_CITY_API = "/master/city";
