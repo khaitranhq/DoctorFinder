@@ -2,11 +2,7 @@ package com.leoaslan.docfind.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +14,6 @@ public class UserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userTypeID;
 
+    @Column(columnDefinition = "nvarchar(100)")
     private @NonNull String userTypeName;
 }

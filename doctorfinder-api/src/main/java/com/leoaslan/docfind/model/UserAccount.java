@@ -2,13 +2,7 @@ package com.leoaslan.docfind.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 
@@ -24,13 +18,15 @@ public class UserAccount {
 
     private @NonNull String email;
     private @NonNull String password;
+
+    @Column(columnDefinition = "nvarchar(100)")
     private @NonNull String fullName;
 
     @OneToOne
     @JoinColumn(name="userTypeID")
     private @NonNull UserType userType;
 
-    private Date birthDate;
+    private Date birthdate;
     private String avatarFileName;
 
     private @NonNull int phoneNumber;

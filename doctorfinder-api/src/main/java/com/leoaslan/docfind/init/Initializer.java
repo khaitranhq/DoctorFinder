@@ -23,7 +23,8 @@ public class Initializer implements CommandLineRunner {
     private final CityRepository cityRepository;
     private final UserTypeRepository userTypeRepository;
 
-    public Initializer(UserAccountRepository userAccountRepository, SpecialtyRepository specialtyRepository, CityRepository cityRepository, UserTypeRepository userTypeRepository){
+    public Initializer(UserAccountRepository userAccountRepository, SpecialtyRepository specialtyRepository,
+                       CityRepository cityRepository, UserTypeRepository userTypeRepository) {
         this.userAccountRepository = userAccountRepository;
         this.specialtyRepository = specialtyRepository;
         this.cityRepository = cityRepository;
@@ -35,51 +36,29 @@ public class Initializer implements CommandLineRunner {
 //        List<City> listCity = new ArrayList<City>();
 //        List<Specialty> listSpecialty = new ArrayList<Specialty>();
 //        List<UserType> listUserType = new ArrayList<UserType>();
-//
-//        //Initialize for City
-//        Stream.of(
-//            "Hà Nội",
-//            "Đà Nẵng",
-//            "Thành Phố Hồ Chí Minh"
-//        ).forEach(cityName -> listCity.add(new City(cityName)));
+
+//        // Initialize for City
+//        Stream.of("Hà Nội", "Đà Nẵng", "Thành Phố Hồ Chí Minh").forEach(cityName -> listCity.add(new City(cityName)));
 //        listCity.forEach(city -> cityRepository.save(city));
 //        cityRepository.findAll().forEach(System.out::println);
-//
-//        //Initialize for Specialty
-//        Stream.of(
-//            "Khoa Thần Kinh",
-//            "Khoa nhi",
-//            "Khoa ung bướu"
-//        ).forEach(specialtyName -> listSpecialty.add(new Specialty(specialtyName)));
+
+//        // Initialize for Specialty
+//        Stream.of("Khoa Thần Kinh", "Khoa nhi", "Khoa ung bướu")
+//                .forEach(specialtyName -> listSpecialty.add(new Specialty(specialtyName)));
 //        listSpecialty.forEach(specialty -> specialtyRepository.save(specialty));
 //        specialtyRepository.findAll().forEach(System.out::println);
-//
-//        //Initialize for User Type
-//        Stream.of(
-//            "Doctor",
-//            "Patient",
-//            "Admin"
-//        ).forEach(userTypeName -> listUserType.add(new UserType(userTypeName)));
+
+//        // Initialize for User Type
+//        Stream.of("Doctor", "Patient", "Admin").forEach(userTypeName -> listUserType.add(new UserType(userTypeName)));
 //        listUserType.forEach(userType -> userTypeRepository.save(userType));
 //        userTypeRepository.findAll().forEach(System.out::println);
-//
-//        //Initialize for User Account
-//        UserAccount doctor1 = new UserAccount(
-//            "doctor1@gmail.com",
-//            "123456",
-//            "Nguyễn Thị Kim Tiến",
-//            listUserType.get(0),
-//            889112834,
-//            listSpecialty.get(0)
-//        ); //For doctor
-//
-//        UserAccount patient1 = new UserAccount(
-//            "patient1@gmail.com",
-//            "123456",
-//            "Trần Hưng Quốc Khải",
-//            listUserType.get(1),
-//            348840993
-//        ); //For patient
+
+//        // Initialize for User Account
+//        UserAccount doctor1 = new UserAccount("doctor1@gmail.com", "123456", "Nguyễn Thị Kim Tiến", listUserType.get(0),
+//                889112834, listSpecialty.get(0)); // For doctor
+
+//        UserAccount patient1 = new UserAccount("patient1@gmail.com", "123456", "Trần Hưng Quốc Khải",
+//                listUserType.get(1), 348840993, listCity.get(1)); // For patient
 //        userAccountRepository.save(doctor1);
 //        userAccountRepository.save(patient1);
     }

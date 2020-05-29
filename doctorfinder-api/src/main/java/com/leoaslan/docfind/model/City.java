@@ -1,10 +1,6 @@
 package com.leoaslan.docfind.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +17,6 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cityID;
 
+    @Column(columnDefinition = "nvarchar(100)")
     private @NonNull String cityName;
 }

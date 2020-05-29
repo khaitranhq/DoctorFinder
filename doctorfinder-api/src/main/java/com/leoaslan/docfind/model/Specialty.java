@@ -5,11 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -21,5 +17,6 @@ public class Specialty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int specialtyID;
 
+    @Column(columnDefinition = "nvarchar(100)")
     private @NonNull String specialtyName;
 }
