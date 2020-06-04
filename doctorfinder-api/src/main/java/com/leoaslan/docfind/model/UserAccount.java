@@ -2,20 +2,15 @@ package com.leoaslan.docfind.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 
+@Builder
 @Data
-@RequiredArgsConstructor
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(schema = "dbo", name="UserAccounts")
 public class UserAccount {
     @Id
@@ -24,36 +19,46 @@ public class UserAccount {
 
     private @NonNull String email;
     private @NonNull String password;
-    private @NonNull String fullName;
+
+//    @Column(name="name")
+    private  String fullName;
 
     @OneToOne
-    @JoinColumn(name="userTypeID")
+    @JoinColumn(name="user_typeid")
     private @NonNull UserType userType;
 
+
+//    @Column (name="userTypeID")
+//    private @NonNull int userTypeID;
+
+
+//    @Column(name="birthday")
     private Date birthdate;
+//    @Column(name="avatar")
     private String avatarFileName;
 
+ //   @Column(name = "phoneNumber")
     private @NonNull int phoneNumber;
-    private int cityID;
+    private String  address;
     private Boolean gender;
 
     @OneToOne
     @JoinColumn(name="specialtyID")
-    private Specialty specialty;
-
-    public UserAccount(
-        String email, 
-        String password,
-        String fullName,
-        UserType userType,
-        int phoneNumber,
-        Specialty specialty
-    ) {
-        this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.userType = userType;
-        this.phoneNumber = phoneNumber;
-        this.specialty = specialty;
-    }
+    private @NonNull Specialty specialty;
+//
+//    public UserAccount(
+//        String email,
+//        String password,
+//        String fullName,
+////        UserType userType,
+//        int phoneNumber,
+//        Specialty specialty
+//    ) {
+//        this.email = email;
+//        this.password = password;
+//        this.fullName = fullName;
+////        this.userType = userType;
+//        this.phoneNumber = phoneNumber;
+//        this.specialty = specialty;
+//    }
 }

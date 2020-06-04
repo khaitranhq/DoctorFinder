@@ -5,7 +5,6 @@ use DoctorFinder;
 create table user_types (
 	userTypeID int not null identity(1,1),
 	userTypeName nvarchar(10),
-	
 	primary key(userTypeID)
 );
 
