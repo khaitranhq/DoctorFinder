@@ -1,53 +1,57 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
-import { Grid } from "@material-ui/core";
+import {
+    Grid,
+    CardHeader,
+    CardMedia,
+    CardContent,
+    Avatar,
+    Card,
+    CardActionArea,
+} from "@material-ui/core";
+import CustomCard from '../../common/CustomCard';
 
-const styles = (theme) => ({});
+const styles = (theme) => ({
+    root: {
+        padding: theme.spacing(0, 5)
+    }
+});
 
-const Element2 = (props) => {
-    const { classes } = props;
+const Element3 = (props) => {
+    const { classes, listDoctor } = props;
+    console.log(listDoctor);
 
-    const dataEle = [];
+    const doctors = [
+        {
+            full_name: "Trần Hưng Quốc Khải",
+            gender: "Nam",
+            phone_number: "0889112834",
+            email: "leoalan5577@gmail.com",
+            birthday: "05/07/2020",
+        },
+        {
+            full_name: "Trần Hưng Quốc Khải",
+            gender: "Nam",
+            phone_number: "0889112834",
+            email: "leoalan5577@gmail.com",
+            birthday: "05/07/2020",
+        },
+    ];
 
     return (
         <Grid
             container
-            direction="column"
             alignItems="center"
-            className={classes.secondElement}
+            className={classes.root}
+            spacing={3}
         >
-            <label className={classes.bigTitle}>
-                What makes us different
-            </label>
-            <Grid container direction="row" justify="center">
-                {dataEle !== [] ? (
-                    dataEle.map((i, key) => (
-                        <Grid
-                            key={key}
-                            container
-                            direction="column"
-                            alignItems="center"
-                            item
-                            md={4}
-                            sm={4}
-                            xs={12}
-                            style={{ position: "relative" }}
-                        >
-                            <CustomCard
-                                id={i.ids}
-                                image={i.image}
-                                title={i.title}
-                                content={i.content}
-                                token={token}
-                            />
-                        </Grid>
-                    ))
-                ) : (
-                    <div />
-                )}
-            </Grid>
+            {listDoctor.map((doctor, key) => (
+                <Grid item key={key} xs={3}>
+                    <CustomCard doctor={doctor}/>
+                </Grid>
+            ))}
         </Grid>
     );
 };
 
-export default withStyles(styles)(Element2);
+export default withStyles(styles)(Element3);
