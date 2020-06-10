@@ -11,5 +11,8 @@ export const request = (url, method, payload = {}) => {
 };
 
 export const DOCTORS_API = "/doctor";
+
 export const MASTER_SPECIALTY_API = "/master/specialty";
 export const MASTER_CITY_API = "/master/city";
+
+export const LOGIN_API = "/login";
