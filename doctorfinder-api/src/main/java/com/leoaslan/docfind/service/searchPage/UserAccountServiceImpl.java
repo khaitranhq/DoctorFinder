@@ -20,9 +20,6 @@ public class UserAccountServiceImpl implements UserAccountService{
 
     public ResponseEntity<?> findDoctor(String FullName, int CityID, int SpecialtyID){
         Optional<List<UserAccount>> userAccountOptional = Optional.ofNullable(userAccountRepository.findDoctor(FullName, CityID, SpecialtyID));
-        System.out.println(FullName);
-        System.out.println(CityID);
-        System.out.println(SpecialtyID);
         System.out.println(userAccountOptional);
         return userAccountOptional.map(userAccount -> ResponseEntity.ok().body(userAccount)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

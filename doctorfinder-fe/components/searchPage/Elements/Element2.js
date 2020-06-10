@@ -12,7 +12,7 @@ const styles = (theme) => ({
     txtField: {
         background: "#FFF",
         borderRadius: 5,
-        width: 236,
+        // width: "100%",
         height: 52,
     },
     wrapInput: {
@@ -37,9 +37,7 @@ const top100Films = [
 ];
 
 const Element2 = (props) => {
-    const { classes, specialties, cities } = props;
-    console.log(specialties);
-    console.log(cities);
+    const { classes, specialties, cities, onSubmit } = props;
     const [doctorSpecialty, setDoctorSpecialty] = useState("");
     const [doctorCity, setDoctorCity] = useState("");
     const [doctorName, setDoctorName] = useState("");
@@ -54,47 +52,11 @@ const Element2 = (props) => {
                 className={classes.wrapInput}
             >
                 <Grid item xs={3}>
-                    <Autocomplete
-                        popupIcon={false}
-                        options={specialties.map(
-                            (option) => option.specialtyName
-                        )}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="freeSolo"
-                                margin="normal"
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                        className={classes.autocomplete}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                <Autocomplete
-                        popupIcon={false}
-                        options={cities.map(
-                            (option) => option.cityName
-                        )}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="freeSolo"
-                                margin="normal"
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                        className={classes.autocomplete}
-                    />
-                </Grid>
-                <Grid item xs={3}>
                     <TextField
-                        label="Name"
+                        label="Họ và tên"
                         margin="normal"
-                        fullWidth
                         variant="outlined"
+                        fullWidth
                         onChange={(e) => setDoctorName(e.target.value)}
                         InputProps={{
                             className: classes.txtField,
@@ -102,15 +64,49 @@ const Element2 = (props) => {
                     />
                 </Grid>
                 <Grid item xs={3}>
+                    <Autocomplete
+                        popupIcon={false}
+                        options={specialties}
+                        getOptionLabel={(specialty) => specialty.specialtyName}
+                        onChange={(e, specialty) =>
+                            setDoctorSpecialty(specialty)
+                        }
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Chuyên khoa"
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
+                            />
+                        )}
+                        className={classes.autocomplete}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <Autocomplete
+                        popupIcon={false}
+                        options={cities}
+                        getOptionLabel={(city) => city.cityName}
+                        onChange={(e, city) => setDoctorCity(city)}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Thành phố"
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
+                            />
+                        )}
+                        className={classes.autocomplete}
+                    />
+                </Grid>
+                <Grid item xs={3}>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={async () =>
-                            await onSubmit(
-                                doctorSpecialty,
-                                doctorCity,
-                                doctorName
-                            )
+                        onClick={() =>
+                            onSubmit(doctorSpecialty, doctorCity, doctorName)
                         }
                         className={classes.btn}
                     >
