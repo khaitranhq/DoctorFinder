@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonBase, Hidden, Box, withStyles } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
+import clsx from "clsx";
 
 const styles = (theme) => ({
     leftOption: {
@@ -10,11 +11,10 @@ const styles = (theme) => ({
     },
     logoBtn: {
         height: "100%",
-        padding: "0px 15px",
+        padding: "0px 30px",
         color: "#001924",
-        fontFamily: "Orbitron",
-        fontWeight: "bold",
-        fontSize: 15,
+        fontFamily: "Faster One",
+        fontSize: 22,
         [theme.breakpoints.down("sm")]: {
             padding: "0px 10px",
             fontSize: 12,
@@ -25,7 +25,7 @@ const styles = (theme) => ({
         height: "100%",
         fontFamily: "Roboto Slab",
         color: "#575757",
-        fontSize: 14,
+        fontSize: 12,
         "&:hover": {
             backgroundColor: "#EBEBF2",
         },
@@ -33,10 +33,29 @@ const styles = (theme) => ({
             padding: "0px 7px",
         },
     },
+    borderBottom: {
+        borderBottom: "solid 5px #C4212A",
+    },
 });
 
 const LeftOption = (props) => {
-    const { classes } = props;
+    const { classes, page } = props;
+
+    const pageTitles = [
+        {
+            label: "TRANG CHỦ",
+            title: "home",
+        },
+        {
+            label: "GIỚI THIỆU",
+            title: "about",
+        },
+        {
+            label: "LIÊN HỆ",
+            title: "contact",
+        },
+    ];
+
     return (
         <Box
             display="flex"
@@ -48,17 +67,21 @@ const LeftOption = (props) => {
                 <Hidden mdUp>
                     <HomeIcon />
                 </Hidden>
-                <Hidden smDown>DOCTOR FINDER</Hidden>
+                <Hidden smDown>DFINDER</Hidden>
             </ButtonBase>
-            <Hidden smDown>
-                <ButtonBase className={classes.titleBtn}>Doctor</ButtonBase>
-            </Hidden>
-            <Hidden smDown>
-                <ButtonBase className={classes.titleBtn}>About</ButtonBase>
-            </Hidden>
-            <Hidden smDown>
-                <ButtonBase className={classes.titleBtn}>Contact us</ButtonBase>
-            </Hidden>
+            {pageTitles.map((pageTitle, key) => (
+                <Hidden smDown key={key}>
+                    <ButtonBase
+                        className={clsx(
+                            classes.titleBtn,
+                            page === pageTitle.title && classes.borderBottom
+                        )}
+                    >
+                        {pageTitle.label}
+                    </ButtonBase>
+                </Hidden>
+            ))}
+            ;
         </Box>
     );
 };

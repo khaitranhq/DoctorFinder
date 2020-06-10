@@ -1,6 +1,7 @@
 import React from "react";
 import { ButtonBase, Hidden, Box, withStyles } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
+import clsx from "clsx";
 
 const styles = (theme) => ({
     rightOption: {
@@ -12,7 +13,7 @@ const styles = (theme) => ({
         padding: "0px 15px",
         height: "100%",
         color: "#001924",
-        fontSize: 15,
+        fontSize: 12,
         fontFamily: "Roboto Slab",
         "&:hover": {
             backgroundColor: "#EBEBF2",
@@ -21,6 +22,9 @@ const styles = (theme) => ({
             padding: "0px 10px",
             fontSize: 10,
         },
+    },
+    marginRight: {
+        marginRight: 20,
     },
 });
 
@@ -34,14 +38,14 @@ const RightOption = (props) => {
             className={classes.rightOption}
         >
             <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>Log in</Hidden>
+                <Hidden xsDown>ĐĂNG NHẬP</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
             </ButtonBase>
 
-            <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>Sign up</Hidden>
+            <ButtonBase className={clsx(classes.titleBtn, classes.marginRight)}>
+                <Hidden xsDown>ĐĂNG KÍ</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
