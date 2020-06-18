@@ -44,7 +44,7 @@ public class UserAccount {
 
     @OneToOne
     @JoinColumn(name="specialtyID")
-    private @NonNull Specialty specialty;
+    private  Specialty specialty;
 //
 //    public UserAccount(
 //        String email,

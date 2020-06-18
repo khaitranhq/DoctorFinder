@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/signup")
+@RequestMapping("/account")
 @Log4j2
 public class SignupPageController {
     @Autowired
     SignUpService signUpService;
 
-    @PostMapping("/account")
+    @PostMapping("/signup")
     ResponseEntity<?> signup(SignupPageDTO sPC) {
-        log.info(sPC);
         return signUpService.signup(sPC);
     }
 }
