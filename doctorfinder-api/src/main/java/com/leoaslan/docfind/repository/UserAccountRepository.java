@@ -30,5 +30,8 @@ public interface UserAccountRepository  extends JpaRepository<UserAccount, Integ
 
     @Query(value="insert into user_accounts (address,avatar_file_name,birthday,email,full_name,gender,password,phone_number,specialtyid,user_typeid) " +
             "values (address,avatar_file_name,birthday,email,full_name,gender,password,phone_number,specialtyid,user_typeid)",nativeQuery =true)
-    Void InsertUserAccount(String address, String avatarFileName, Date birthday, String email, String name, Boolean gender, String password, int phoneNumber, int specialtyID, int userTypeID      );
+    Void InsertUserAccount(String address, String avatarFileName, Date birthday, String email, String name, Boolean gender, String password, int phoneNumber, int specialtyID, int userTypeID );
+
+    UserAccount findByEmail(String email);
+
 }
