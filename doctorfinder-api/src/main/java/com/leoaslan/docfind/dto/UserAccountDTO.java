@@ -11,9 +11,9 @@ import java.util.Map;
 public class UserAccountDTO {
     public UserAccountDTO(Map<String, Object> req){
         this.email = (String) req.get("email");
-        this.password = (String) req.get("Password");
+        this.password = (String) req.get("password");
         this.fullName = (String) req.get("fullName");
-        this.birthday = (LocalDate) req.get("birthday");
+        this.birthday = LocalDate.parse((String) req.get("birthday"));
         this.avatarFileName = (String) req.get("avatarFileName");
         this.phoneNumber = (Integer) req.get("phoneNumber");
         this.detailAddress = (String) req.get("detailAddress");
