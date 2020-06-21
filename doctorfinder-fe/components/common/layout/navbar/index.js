@@ -5,14 +5,15 @@ import RightOption from "./RightOption";
 
 const styles = (theme) => ({
     appbar: {
+        position: "fixed",
         backgroundColor: "#FFF",
         color: "#4D4F5C",
         width: "100%",
         zIndex: 998,
     },
     navbar: {
-        position: "relative",
-        minHeight: 50,
+        minHeight: 60,
+        boxShadow: "0px 3px 6px #00000029",
         width: "100%",
     },
 });

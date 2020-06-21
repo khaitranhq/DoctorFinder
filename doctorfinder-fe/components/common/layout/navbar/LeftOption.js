@@ -13,8 +13,9 @@ const styles = (theme) => ({
         height: "100%",
         padding: "0px 30px",
         color: "#001924",
-        fontFamily: "Faster One",
-        fontSize: 22,
+        fontFamily: "Orbitron",
+        fontWeight: "bold",
+        fontSize: 26,
         [theme.breakpoints.down("sm")]: {
             padding: "0px 10px",
             fontSize: 12,
@@ -23,9 +24,10 @@ const styles = (theme) => ({
     titleBtn: {
         padding: "0px 15px",
         height: "100%",
-        fontFamily: "Roboto Slab",
+        fontFamily: "Roboto",
+        fontWeight: "500",
         color: "#575757",
-        fontSize: 12,
+        fontSize: 17,
         "&:hover": {
             backgroundColor: "#EBEBF2",
         },
@@ -43,15 +45,15 @@ const LeftOption = (props) => {
 
     const pageTitles = [
         {
-            label: "TRANG CHỦ",
+            label: "Tìm kiếm",
             title: "home",
         },
         {
-            label: "GIỚI THIỆU",
+            label: "Giới thiệu",
             title: "about",
         },
         {
-            label: "LIÊN HỆ",
+            label: "Liên hệ",
             title: "contact",
         },
     ];
@@ -67,7 +69,7 @@ const LeftOption = (props) => {
                 <Hidden mdUp>
                     <HomeIcon />
                 </Hidden>
-                <Hidden smDown>DFINDER</Hidden>
+                <Hidden smDown>FinDer</Hidden>
             </ButtonBase>
             {pageTitles.map((pageTitle, key) => (
                 <Hidden smDown key={key}>
@@ -81,7 +83,6 @@ const LeftOption = (props) => {
                     </ButtonBase>
                 </Hidden>
             ))}
-            ;
         </Box>
     );
 };
