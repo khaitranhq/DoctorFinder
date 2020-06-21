@@ -26,7 +26,7 @@ const styles = (theme) => ({
         },
     },
     bigTitle: {
-        fontFamily: "Faster One",
+        fontFamily: "Orbitron",
         [theme.breakpoints.down("lg")]: {
             fontSize: theme.spacing(4),
         },
@@ -113,8 +113,10 @@ const styles = (theme) => ({
 
 const optionArr = [
     {
-        title: "Investors",
+        title: "Doctors",
         options: [
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
             { title: "Lorem ipsum" },
             { title: "Lorem ipsum" },
             { title: "Lorem ipsum" },
@@ -122,10 +124,42 @@ const optionArr = [
         ],
     },
     {
+        title: "Teams",
+        options: [
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
+            { title: "Lorem ipsum" },
+        ],
+    },
+    {
+        title: "Technology",
+        options: [{ title: "Blockchain" }, { title: "AI" }],
+    },
+    {
+        title: "About",
+        options: [
+            { title: "About Ezteam" },
+            { title: "How Ezteam works" },
+            { title: "Why choose EzTeam" },
+        ],
+    },
+    {
+        title: "Terms",
+        options: [
+            { title: "Terms of use" },
+            { title: "Customer terms" },
+            { title: "Terms of payment" },
+        ],
+    },
+    {
         title: "Contact",
         options: [
-            { title: "napaglobal@napaglobal.com" },
-            { title: "0779 789 6789" },
+            { title: "Help center" },
+            { title: "Community forums" },
+            { title: "Contact" },
         ],
     },
 ];

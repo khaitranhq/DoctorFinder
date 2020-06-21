@@ -4,58 +4,70 @@ import { Autocomplete } from "@material-ui/lab";
 import { request, GET_DOCTORS_API } from "../../../src/utils/apiRequest";
 
 const styles = (theme) => ({
+    root: {
+        marginTop: "60px",
+    },
     img: {
         width: "100%",
-        height: theme.spacing(60),
+        height: theme.spacing(64),
     },
-    form: {
+    wrappedFloat: {
         width: "100%",
-        height: theme.spacing(60),
+        height: theme.spacing(64),
         zIndex: 1,
         position: "absolute",
         top: 0,
         left: 0,
-        color: "#fff",
-        font: "",
+        color: "#ffffff",
+        fontFamily: "Roboto",
+        marginTop: theme.spacing(5)
     },
     bigTitle: {
-        fontFamily: "Philosopher",
-        fontSize: 35,
-        fontWeight: 800,
+        fontSize: "50px",
+        fontWeight: "bold",
     },
     smallTitle: {
-        fontFamily: "Philosopher",
-        fontSize: 15,
-        fontWeight: 800,
+        fontSize: "30px",
+        fontWeight: 500,
     },
     autocomplete: {
-        background: "#FFF",
-        borderRadius: 5,
-        width: 236,
-        height: 52,
+        border: "none",
+        "& .MuiFormControl-marginNormal": {
+            marginTop: 8,
+        },
     },
     txtField: {
         background: "#FFF",
         borderRadius: 5,
-        width: 236,
-        height: 52,
+        // width: "100%",
+        // height: 52,
     },
-    wrapInput: {
-        marginTop: 30,
-        marginBottom: 6,
+    wrappedForm: {
+        width: "100%",
+        padding: theme.spacing(0, 15),
+        marginTop: theme.spacing(2),
+    },
+    wrapBtn: {
+        width: "100%",
+        marginTop: theme.spacing(2.5)
     },
     btn: {
-        background: "#3163C1",
-        width: 100,
-        height: 40,
+        background: "#00796B",
+        // margin: "20px 0px",
+        width: 130,
+        height: 47,
+        fontSize: 17
     },
 });
 
 const specialties = [{ title: "DFSDF", year: 1994 }];
 
 const Element1 = (props) => {
-    const { classes, onSubmit } = props;
+    const { classes, onSubmit, specialties, cities } = props;
 
+    const [doctorSpecialty, setDoctorSpecialty] = useState("");
+    const [doctorCity, setDoctorCity] = useState("");
+    const [doctorName, setDoctorName] = useState("");
 
     return (
         <div className={classes.root}>
@@ -63,7 +75,7 @@ const Element1 = (props) => {
                 src="../../../static/images/download.png"
                 className={classes.img}
             />
-            <div className={classes.form}>
+            <div className={classes.wrappedFloat}>
                 <Grid
                     container
                     alignItems="center"
@@ -73,23 +85,106 @@ const Element1 = (props) => {
                 >
                     <Grid item>
                         <label className={classes.bigTitle}>
-                            Bạn Cần Tư Vấn Về Sức Khỏe?
+                            Tìm kiếm bác sĩ cho bạn
                         </label>
                     </Grid>
                     <Grid item>
                         <label className={classes.smallTitle}>
-                            Hãy để chúng tôi giúp bạn giảm thời gian chờ ở bệnh
-                            viện
+                            Nhanh chóng - Phù hợp - Uy tín
                         </label>
                     </Grid>
-              </Grid>      
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        alignItems="center"
+                        className={classes.wrappedForm}
+                        spacing={6}
+                    >
+                        <Grid item xs={4} className={classes.wrappedInput}>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                label="Họ và tên"
+                                className={classes.txtField}
+                                onChange={e => setDoctorName(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Autocomplete
+                                popupIcon={false}
+                                options={specialties}
+                                getOptionLabel={(specialty) =>
+                                    specialty.specialtyName
+                                }
+                                onChange={(e, specialty) =>
+                                    setDoctorSpecialty(specialty)
+                                }
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Chuyên khoa"
+                                        margin="normal"
+                                        variant="outlined"
+                                        fullWidth
+                                        style={{
+                                            backgroundColor: "#FFF",
+                                            borderRadius: "5px",
+                                        }}
+                                    />
+                                )}
+                                className={classes.autocomplete}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Autocomplete
+                                popupIcon={false}
+                                options={cities}
+                                getOptionLabel={(city) => city.cityName}
+                                onChange={(e, city) => setDoctorCity(city)}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Thành phố"
+                                        margin="normal"
+                                        variant="outlined"
+                                        fullWidth
+                                        style={{
+                                            backgroundColor: "#FFF",
+                                            borderRadius: "5px",
+                                        }}
+                                    />
+                                )}
+                                className={classes.autocomplete}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        justify="center"
+                        className={classes.wrapBtn}
+                    >
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() =>
+                                onSubmit(
+                                    doctorSpecialty,
+                                    doctorCity,
+                                    doctorName
+                                )
+                            }
+                            className={classes.btn}
+                        >
+                            Tìm kiếm
+                        </Button>
+                    </Grid>
+                </Grid>
             </div>
         </div>
     );
 };
 
-Element1.getInitialProps = async (ctx) => {
-    
-};
+Element1.getInitialProps = async (ctx) => {};
 
 export default withStyles(styles)(Element1);

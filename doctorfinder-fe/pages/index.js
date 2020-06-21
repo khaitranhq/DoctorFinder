@@ -6,7 +6,7 @@ import { request, MASTER_SPECIALTY_API, MASTER_CITY_API } from '../src/utils/api
 const Index = (props) => {
     const { specialties, cities } = props;
     return (
-        <Layout page="search">
+        <Layout page="home">
             <SearchPage specialties={specialties} cities={cities} />
         </Layout>
     );
@@ -18,7 +18,7 @@ Index.getInitialProps = async () => {
         const cities = await request(MASTER_CITY_API, "GET");
         return {
             specialties: specialties.data,
-            cities: cities.data
+            cities: cities.data	
         }
     } catch(err) {
         console.error(err);

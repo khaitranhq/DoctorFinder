@@ -1,120 +1,99 @@
-import React, { useState } from "react";
-import { Grid, withStyles, TextField, Button } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
+import React from "react";
+import { withStyles } from "@material-ui/styles";
+import {
+    Grid,
+    CardHeader,
+    CardMedia,
+    CardContent,
+    Avatar,
+    Card,
+    CardActionArea,
+} from "@material-ui/core";
+import CustomCard from "../../common/CustomCard";
+import { Label } from "@material-ui/icons";
 
 const styles = (theme) => ({
-    autocomplete: {
-        background: "#FFF",
-        borderRadius: "10px",
+    wrapCards: {
         width: "100%",
-        height: "52px",
+        padding: theme.spacing(8, 0)
     },
-    txtField: {
-        background: "#FFF",
-        borderRadius: 5,
-        // width: "100%",
-        height: 52,
+    wrapNoResult: {
+        height: theme.spacing(90),
     },
-    wrapInput: {
-        marginTop: 30,
-        marginBottom: 6,
+    notFoundText: {
+        fontFamily: 'Roboto',
+        fontSize: "25px",
+        fontWeight: 'bold',
+        color: '#618C93',
+        marginTop: theme.spacing(4)
     },
-    btn: {
-        background: "#3163C1",
-        margin: "20px 0px",
-        width: 100,
-        height: 40,
-    },
+    marginCard: {
+        marginTop: theme.spacing(4)
+    }
 });
 
-const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-];
-
 const Element2 = (props) => {
-    const { classes, specialties, cities, onSubmit } = props;
-    const [doctorSpecialty, setDoctorSpecialty] = useState("");
-    const [doctorCity, setDoctorCity] = useState("");
-    const [doctorName, setDoctorName] = useState("");
+    const { classes, listDoctor } = props;
+    // const listDoctor = [
+    //     {
+    //         fullName: "Bác sĩ Khải",
+    //         email: "leoalan5577@gmail.com",
+    //         phoneNumber: 889112834,
+    //         detailAddress: "17 Phần Lăng 15, Hải Châu, Đà Nẵng",
+    //         avatar: "doctor1.png"
+    //     },
+    //     {
+    //         fullName: "Bác sĩ Khải",
+    //         email: "leoalan5577@gmail.com",
+    //         phoneNumber: 889112834,
+    //         detailAddress: "17 Phần Lăng 15, Hải Châu, Đà Nẵng",
+    //         avatar: "doctor1.png"
+    //     },
+    //     {
+    //         fullName: "Bác sĩ Khải",
+    //         email: "leoalan5577@gmail.com",
+    //         phoneNumber: 889112834,
+    //         detailAddress: "17 Phần Lăng 15, Hải Châu, Đà Nẵng",
+    //         avatar: "doctor1.png"
+    //     },
+    //     {
+    //         fullName: "Bác sĩ Khải",
+    //         email: "leoalan5577@gmail.com",
+    //         phoneNumber: 889112834,
+    //         detailAddress: "17 Phần Lăng 15, Hải Châu, Đà Nẵng",
+    //         avatar: "doctor1.png"
+    //     }
+    // ]
+    console.log(listDoctor);
 
     return (
-        <div style={{ background: "#fff" }}>
-            <Grid
-                container
-                container
-                justify="center"
-                spacing={2}
-                className={classes.wrapInput}
-            >
-                <Grid item xs={3}>
-                    <TextField
-                        label="Họ và tên"
-                        margin="normal"
-                        variant="outlined"
-                        fullWidth
-                        onChange={(e) => setDoctorName(e.target.value)}
-                        InputProps={{
-                            className: classes.txtField,
-                        }}
-                    />
+        <Grid className={classes.root}>
+            {listDoctor.length === 0 ? (
+                <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                    direction="column"
+                    className={classes.wrapNoResult}
+                >
+                    <img src="../../../static/images/not_found.png" />
+                    <label className={classes.notFoundText}>Không có kết quả tìm kiếm</label>
                 </Grid>
-                <Grid item xs={3}>
-                    <Autocomplete
-                        popupIcon={false}
-                        options={specialties}
-                        getOptionLabel={(specialty) => specialty.specialtyName}
-                        onChange={(e, specialty) =>
-                            setDoctorSpecialty(specialty)
-                        }
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Chuyên khoa"
-                                margin="normal"
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                        className={classes.autocomplete}
-                    />
+            ) : (
+                <Grid
+                    container
+                    alignItems="center"
+                    className={classes.wrapCards}
+                    spacing={3}
+                >
+                    {listDoctor.map((doctor, key) => (
+                        <Grid item container justify="center" key={key} xs={4} className={classes.marginCard}>
+                            <CustomCard doctor={doctor} />
+                        </Grid>
+                    ))}
                 </Grid>
-                <Grid item xs={3}>
-                    <Autocomplete
-                        popupIcon={false}
-                        options={cities}
-                        getOptionLabel={(city) => city.cityName}
-                        onChange={(e, city) => setDoctorCity(city)}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Thành phố"
-                                margin="normal"
-                                variant="outlined"
-                                fullWidth
-                            />
-                        )}
-                        className={classes.autocomplete}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() =>
-                            onSubmit(doctorSpecialty, doctorCity, doctorName)
-                        }
-                        className={classes.btn}
-                    >
-                        Search
-                    </Button>
-                </Grid>
-            </Grid>
-        </div>
+            )}
+        </Grid>
     );
 };
 

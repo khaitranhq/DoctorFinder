@@ -18,7 +18,6 @@ public class searchPageController {
         String fullName = (String) req.get("fullName");
         int cityID = (int) req.get("cityID");
         int specialtyid = (int) req.get("specialtyID");
-        // System.out.println(full_name);
         return userAccountService.findDoctor(fullName, cityID, specialtyid);
     }
 }

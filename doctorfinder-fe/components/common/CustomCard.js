@@ -1,40 +1,114 @@
 import React from "react";
 import { withStyles } from "@material-ui/styles";
-import { Grid } from "@material-ui/core";
-import { Wc, Phone, Email, Cake } from "@material-ui/icons";
+import { Grid, Avatar, Button } from "@material-ui/core";
+import { Home, Phone, Email } from "@material-ui/icons";
+import clsx from "clsx";
 
 const styles = (theme) => ({
     root: {
         background: "#ffffff",
-        // maxWidth: theme.spacing(10),
+        width: theme.spacing(55),
+        height: theme.spacing(26),
+        boxShadow: "0px 3px 6px #00000029",
     },
-    img: {
+    wrapHeader: {
         width: "100%",
-        height: theme.spacing(25),
+        background: "#ECECEC",
+        height: "82px",
+    },
+    doctorName: {
+        color: "#707070",
+        fontFamily: "Roboto",
+        fontSize: "22px",
+        fontWeight: "bold",
+    },
+    btn: {
+        color: "#FFFFFF",
+        fontFamily: "Roboto",
+        fontSize: "14px",
+        fontWeight: 500,
+        background: "#009688",
+        // marginLeft: "109px",
+    },
+    marginLeft22: {
+        marginLeft: 22,
+        marginTop: 22,
+    },
+    inforText: {
+        marginLeft: "8px",
     },
 });
 
 const CustomCard = (props) => {
     const { classes, doctor } = props;
 
-    const componentForAttribute = [
-        { icon: <Wc />, key: "gender" },
-        { icon: <Phone />, key: "phone_number" },
-        { icon: <Email />, key: "email" },
-        { icon: <Cake />, key: "birthday" },
-    ];
-
     return (
-        <Grid container className={classes.root}>
-            <img src="/static/images/doctor2.jpg" className={classes.img} />
-            <Grid item>{doctor.full_name}</Grid>
-            {componentForAttribute.map((component, key) => (
-                <Grid item key={key}>
-                    {component.icon}
-                    {doctor[component.key]}
+        <div className={classes.root}>
+            <Grid
+                container
+                direction="row"
+                alignItems="center"
+                className={classes.wrapHeader}
+            >
+                <Grid item xs={2} container justify="center">
+                    <Avatar
+                        src="../../static/images/doctor1.jpg"
+                        className={classes.avatar}
+                    />
                 </Grid>
-            ))}
-        </Grid>
+
+                <Grid item xs={7}>
+                    <label className={classes.doctorName}>
+                        {doctor.fullName}
+                    </label>
+                </Grid>
+                <Grid
+                    item
+                    xs={3}
+                    container
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Button className={classes.btn}>Đăng kí</Button>
+                </Grid>
+            </Grid>
+            <Grid container className={classes.wrapContent}>
+                <Grid item container className={classes.marginLeft22}>
+                    <Grid item container alignItems="center" xs={4}>
+                        <Phone />
+                        <label className={classes.inforText}>
+                            0{doctor.phoneNumber}
+                        </label>
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        alignItems="center"
+                        justify="flex-end"
+                        xs={8}
+                        style={{ paddingRight: 24}}
+                    >
+                        <Email />
+                        <label className={classes.inforText}>
+                            {doctor.email}
+                        </label>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    alignItems="center"
+                    className={classes.marginLeft22}
+                >
+                    <Home />
+                    <label className={classes.inforText}>
+                        {doctor.detailAddress}
+                    </label>
+                </Grid>
+            </Grid>
+        </div>
     );
 };
 

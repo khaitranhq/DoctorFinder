@@ -27,7 +27,7 @@ public class Initializer implements CommandLineRunner {
     private final UserTypeRepository userTypeRepository;
 
     public Initializer(UserAccountRepository userAccountRepository, SpecialtyRepository specialtyRepository,
-            CityRepository cityRepository, UserTypeRepository userTypeRepository) {
+        CityRepository cityRepository, UserTypeRepository userTypeRepository) {
         this.userAccountRepository = userAccountRepository;
         this.specialtyRepository = specialtyRepository;
         this.cityRepository = cityRepository;
@@ -60,15 +60,15 @@ public class Initializer implements CommandLineRunner {
         // // For doctor
         // Calendar doctorBirthday = Calendar.getInstance();
         // doctorBirthday.set(100, 7, 5);
-        // UserAccount doctor1 = new UserAccount("doctor1@gmail.com", "123", "Bác sĩ Khải", listUserType.get(1),
-        //         doctorBirthday, "doctor1.png", 889112834, listCity.get(1), "17 Phần Lăng 15, Hải Châu, Đà Nẵng", true,
-        //         listSpecialty.get(1)); 
+        // UserAccount doctor1 = new UserAccount("doctor1@gmail.com", "123", "Bác sĩ Khải", listUserType.get(0),
+        //         doctorBirthday, "doctor1.png", 889112834, listCity.get(0), "17 Phần Lăng 15, Hải Châu, Đà Nẵng", true,
+        //         listSpecialty.get(0)); 
 
         // // For patient
         // Calendar patientBirthday = Calendar.getInstance();
         // patientBirthday.set(100, 7, 5);
         // UserAccount patient1 = new UserAccount("patient1@gmail.com", "123", "Bệnh nhân Khải", listUserType.get(1),
-        //         patientBirthday, "patient1.png", 348840993, listCity.get(1), "17 Phần Lăng 15", true); 
+        //         patientBirthday, "patient1.png", 348840993, listCity.get(0), "17 Phần Lăng 15", true); 
         // userAccountRepository.save(doctor1);
         // userAccountRepository.save(patient1);
     }

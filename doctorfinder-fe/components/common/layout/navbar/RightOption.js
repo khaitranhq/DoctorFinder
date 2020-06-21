@@ -1,7 +1,7 @@
 import React from "react";
-import { ButtonBase, Hidden, Box, withStyles } from "@material-ui/core";
+import { ButtonBase, Button, Hidden, Box, withStyles, Link } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
-import clsx from "clsx";
+import Router from "next/router";
 
 const styles = (theme) => ({
     rightOption: {
@@ -9,12 +9,13 @@ const styles = (theme) => ({
         height: "100%",
         right: 0,
     },
-    titleBtn: {
+    signupBtn: {
         padding: "0px 15px",
         height: "100%",
-        color: "#001924",
-        fontSize: 12,
-        fontFamily: "Roboto Slab",
+        color: "#575757",
+        fontSize: 17,
+        fontFamily: "Roboto",
+        fontWeigth: "500",
         "&:hover": {
             backgroundColor: "#EBEBF2",
         },
@@ -23,8 +24,22 @@ const styles = (theme) => ({
             fontSize: 10,
         },
     },
-    marginRight: {
-        marginRight: 20,
+    loginBtn: {
+        margin: "10px 15px",
+        padding: "7px 22px",
+        color: "#fff",
+        fontSize: 17,
+        fontFamily: "Roboto",
+        textTransform: "none",
+        backgroundColor: "#00796B",
+        "&:hover": {
+            backgroundColor: "#EBEBF2",
+            color: "#575757"
+        },
+        [theme.breakpoints.down("sm")]: {
+            padding: "0px 10px",
+            fontSize: 10,
+        },
     },
 });
 
@@ -37,19 +52,23 @@ const RightOption = (props) => {
             alignItems="center"
             className={classes.rightOption}
         >
-            <ButtonBase className={classes.titleBtn}>
-                <Hidden xsDown>ĐĂNG NHẬP</Hidden>
+            <ButtonBase
+                className={classes.signupBtn}
+                onClick={() => Router.push("/auth/signup")}
+            >
+                <Hidden xsDown>Đăng kí</Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
             </ButtonBase>
-
-            <ButtonBase className={clsx(classes.titleBtn, classes.marginRight)}>
-                <Hidden xsDown>ĐĂNG KÍ</Hidden>
+            <Link href="/auth/signin">
+                <Hidden xsDown>
+                    <Button className={classes.loginBtn}>Đăng nhập</Button>
+                </Hidden>
                 <Hidden smUp>
                     <LockIcon color="action" />
                 </Hidden>
-            </ButtonBase>
+            </Link>
         </Box>
     );
 };
