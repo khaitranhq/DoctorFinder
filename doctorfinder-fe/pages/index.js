@@ -14,11 +14,11 @@ const Index = (props) => {
 
 Index.getInitialProps = async () => {
     try{
-        // const specialties = await request(MASTER_SPECIALTY_API, "GET");
-        // const cities = await request(MASTER_CITY_API, "GET");
+        const specialties = await request(MASTER_SPECIALTY_API, "GET");
+        const cities = await request(MASTER_CITY_API, "GET");
         return {
-            specialties: [],
-            cities: []
+            specialties: specialties.data,
+            cities: cities.data	
         }
     } catch(err) {
         console.error(err);
