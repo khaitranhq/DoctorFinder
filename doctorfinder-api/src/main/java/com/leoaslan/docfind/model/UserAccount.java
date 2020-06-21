@@ -1,6 +1,6 @@
 package com.leoaslan.docfind.model;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
@@ -21,13 +21,13 @@ public class UserAccount {
 
     // For doctor
     public UserAccount(@NonNull String email, @NonNull String password, @NonNull String fullName,
-            @NonNull UserType userType, Calendar birthCalendar, String avatarFileName, @NonNull int phoneNumber,
+            @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
             @NonNull City city, String detailAddress, Boolean gender, Specialty specialty) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.userType = userType;
-        this.birthCalendar = birthCalendar;
+        this.birthday = birthday;
         this.avatarFileName = avatarFileName;
         this.phoneNumber = phoneNumber;
         this.city = city;
@@ -38,13 +38,13 @@ public class UserAccount {
 
     // For patient
     public UserAccount(@NonNull String email, @NonNull String password, @NonNull String fullName,
-            @NonNull UserType userType, Calendar birthCalendar, String avatarFileName, @NonNull int phoneNumber,
+            @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
             @NonNull City city, String detailAddress, Boolean gender) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
         this.userType = userType;
-        this.birthCalendar = birthCalendar;
+        this.birthday = birthday;
         this.avatarFileName = avatarFileName;
         this.phoneNumber = phoneNumber;
         this.city = city;
@@ -59,7 +59,7 @@ public class UserAccount {
     @JoinColumn(name = "userTypeID")
     private @NonNull UserType userType;
 
-    private Calendar birthCalendar;
+    private LocalDate birthday;
     private String avatarFileName;
 
     private @NonNull int phoneNumber;
