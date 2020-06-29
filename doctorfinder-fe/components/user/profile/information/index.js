@@ -9,30 +9,53 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@material-ui/core";
-import {
-  DatePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { request, PROFILE_API } from "../../../../src/utils/apiRequest";
 
 const Information = (props) => {
+  const { specialties, cities } = props;
+
   const [userProfile, setUserProfile] = useState(props.userProfile);
   const [showPopup, setShowPopup] = useState(false);
 
-  const [fullName, setFullName] = useState(userProfile.fullName);
-  const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState(user.password);
-  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-  const [detailAddress, setDetailAddress] = useState(user.detailAddress);
-  const [gender, setGender] = useState(user.gender);
-  const [city, setCity] = useState(user.city);
-  const [specialty, setSpecialty] = useState(user.specialty);
-  const [birthday, setBirthday] = useState(new Date());
+  const handleChange = (key, value) => {
+    if (key === "city") {
+      const city = cities.find((city) => city.cityID === value);
+      setUserProfile({ ...userProfile, city });
+      return;
+    }
+
+    if (key === "specialty") {
+      const specialty = specialties.find(
+        (specialty) => specialty.specialtyID === value
+      );
+      setUserProfile({ ...userProfile, specialty });
+      return;
+    }
+
+    setUserProfile({ ...userProfile, [key]: value });
+  };
 
   const handleShowPopup = () => {
     setShowPopup(true);
+  };
+
+  const handleSubmit = async () => {
+    const payload = {
+      ...userProfile,
+      cityID: userProfile.city.cityID,
+      specialtyID: userProfile.specialty.specialtyID,
+      userTypeID: userProfile.userType.userTypeID
+    };
+    try {
+      await request(PROFILE_API + "/1", "put", payload);
+      setShowPopup(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -45,41 +68,81 @@ const Information = (props) => {
       <DetailInformation userProfile={userProfile} />
       <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
         <label>Chỉnh sửa thông tin cá nhân</label>
-        <TextField name="fullName" label="Họ và tên" />
+        <TextField
+          label="Họ và tên"
+          value={userProfile.fullName}
+          onChange={(e) => handleChange("fullName", e.target.value)}
+        />
 
         <FormControl>
           <InputLabel>Giới tính</InputLabel>
-          <Select>
-            <MenuItem>Nam</MenuItem>
-            <MenuItem>Nữ</MenuItem>
+          <Select
+            value={userProfile.gender}
+            onChange={(e) => handleChange("gender", e.target.value)}
+          >
+            <MenuItem value={true}>Nam</MenuItem>
+            <MenuItem value={false}>Nữ</MenuItem>
           </Select>
         </FormControl>
 
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DatePicker
             label="Sinh nhật"
-            value={birthday}
-            onChange={(date) => setBirthday(date)}
+            value={userProfile.birthday}
+            onChange={(date) => handleChange("birthday", date)}
             renderInput={(props) => <TextField {...props} />}
           />
         </MuiPickersUtilsProvider>
 
-        <TextField label="Email" />
-        <TextField label="Số điện thoại" />
-        <TextField label="Mật khẩu" type="password" />
+        <TextField
+          label="Email"
+          value={userProfile.email}
+          onChange={(e) => handleChange("email", e.target.value)}
+        />
+        <TextField
+          label="Số điện thoại"
+          value={userProfile.phoneNumber}
+          onChange={(e) => handleChange("phoneNumber", e.target.value)}
+        />
+        <TextField
+          label="Mật khẩu"
+          type="password"
+          value={userProfile.password}
+          onChange={(e) => handleChange("password", e.target.value)}
+        />
         <FormControl>
           <InputLabel>Thành phố</InputLabel>
-          <Select>
-            <MenuItem>Đà Nẵng</MenuItem>
+          <Select
+            value={userProfile.city.cityID}
+            onChange={(e) => handleChange("city", e.target.value)}
+          >
+            {cities.map((city, key) => (
+              <MenuItem key={key} value={city.cityID}>
+                {city.cityName}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
-        <TextField label="Địa chỉ cụ thể" />
+        <TextField
+          label="Địa chỉ cụ thể"
+          value={userProfile.detailAddress}
+          onChange={(e) => handleChange("detailAddress", e.target.value)}
+        />
+
         <FormControl>
           <InputLabel>Chuyên khoa</InputLabel>
-          <Select>
-            <MenuItem>Khoa tim mạch</MenuItem>
+          <Select
+            value={userProfile.specialty.specialtyID}
+            onChange={(e) => handleChange("specialty", e.target.value)}
+          >
+            {specialties.map((specialty, key) => (
+              <MenuItem key={key} value={specialty.specialtyID}>
+                {specialty.specialtyName}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
+        <Button onClick={() => handleSubmit()}>Chấp nhận</Button>
       </Dialog>
     </div>
   );

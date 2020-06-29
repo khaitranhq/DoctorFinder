@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/styles";
 
 const styles = (theme) => ({
   root: {
-    boxShadow: "0px 3px 6px",
+    boxShadow: "0px 3px 6px #00000029",
+    background: "#FFFFFF"
   },
   avatar: {
     width: 170,

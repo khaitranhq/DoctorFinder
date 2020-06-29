@@ -15,7 +15,6 @@ const styles = (theme) => ({
 
 const DetailInformation = (props) => {
   const { classes, userProfile } = props;
-  console.log(userProfile);
   return (
     <div>
       <label>Thông tin chi tiết</label>

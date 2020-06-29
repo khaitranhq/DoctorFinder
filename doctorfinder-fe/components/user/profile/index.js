@@ -12,11 +12,15 @@ const styles = (theme) => ({
 });
 
 const Profile = (props) => {
-  const { classes, userProfile } = props;
+  const { classes, userProfile, cities, specialties } = props;
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={3}>
-        <Information userProfile={userProfile} />
+        <Information
+          userProfile={userProfile}
+          cities={cities}
+          specialties={specialties}
+        />
       </Grid>
       <Grid item xs={9}>
         <Schedule />
