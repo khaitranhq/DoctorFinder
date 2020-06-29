@@ -5,6 +5,9 @@ services:
         environment:
             SA_PASSWORD: "Pass@Word1"
             ACCEPT_EULA: "Y"
+            MSSQL_DB: DoctorFinder
+            MSSQL_USER: leoaslan
+            MSSQL_PASSWORD: Pass@Word1
         ports:
             - "1433:1433"
 volumes:

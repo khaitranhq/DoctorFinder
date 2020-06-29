@@ -16,3 +16,5 @@ export const MASTER_SPECIALTY_API = "/master/specialty";
 export const MASTER_CITY_API = "/master/city";
 
 export const LOGIN_API = "/login";
+
+export const PROFILE_API = "/user";

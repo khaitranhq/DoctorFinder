@@ -1,5 +1,5 @@
 
-package com.leoaslan.docfind.service.updateAccount;
+package com.leoaslan.docfind.service.profile;
 
 import com.leoaslan.docfind.dto.UserAccountDTO;
 import com.leoaslan.docfind.model.City;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class UpdateAccountService {
+public class ProfileService {
     @Autowired
     private final UserAccountRepository userAccountRepository;
     private final SpecialtyRepository specialtyRepository;
@@ -66,5 +66,10 @@ public class UpdateAccountService {
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
+    }
+
+    public ResponseEntity<?> get(Integer userID){
+        UserAccount userAccount = userAccountRepository.findByUserID(userID);
+        return ResponseEntity.ok(userAccount);
     }
 }

@@ -1,5 +1,6 @@
-create database demoDoctorFinder
-use demoDoctorFinder
+drop database demoDoctorFinder
+create database DoctorFinder
+use master
 
 create table UserType
 (

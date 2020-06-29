@@ -21,8 +21,8 @@ public class UserAccount {
 
     // For doctor
     public UserAccount(@NonNull String email, @NonNull String password, @NonNull String fullName,
-            @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
-            @NonNull City city, String detailAddress, Boolean gender, Specialty specialty) {
+                       @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
+                       @NonNull City city, String detailAddress, Boolean gender, Specialty specialty) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -38,8 +38,8 @@ public class UserAccount {
 
     // For patient
     public UserAccount(@NonNull String email, @NonNull String password, @NonNull String fullName,
-            @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
-            @NonNull City city, String detailAddress, Boolean gender) {
+                       @NonNull UserType userType, LocalDate birthday, String avatarFileName, @NonNull int phoneNumber,
+                       @NonNull City city, String detailAddress, Boolean gender) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
@@ -59,6 +59,7 @@ public class UserAccount {
     @JoinColumn(name = "userTypeID")
     private @NonNull UserType userType;
 
+    @Column(name = "birthday", columnDefinition = "Date")
     private LocalDate birthday;
     private String avatarFileName;
 
