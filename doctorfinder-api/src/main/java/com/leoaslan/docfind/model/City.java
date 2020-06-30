@@ -2,12 +2,11 @@ package com.leoaslan.docfind.model;
 
 import javax.persistence.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity

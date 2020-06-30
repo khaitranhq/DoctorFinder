@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   Grid,
@@ -6,15 +6,25 @@ import {
   DialogContent,
   Button,
 } from "@material-ui/core";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
 const ConfirmDialog = (props) => {
   const { showConfirmDialog, setShowConfirmDialog } = props;
+
+  const [appointmentTime, setAppointmentTime] = useState(new Date());
 
   const handleCloseConfirmDialog = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setShowConfirmDialog(false);
   };
+
+  const handleCreateAppointment = () => {
+    const payload = {
+      
+    }
+  }
 
   return (
     <Dialog
@@ -24,9 +34,20 @@ const ConfirmDialog = (props) => {
       <DialogTitle>Xác nhận</DialogTitle>
       <DialogContent>
         <Grid container>
-          <Grid>Bạn muốn đăng kí lịch hẹn với bác sĩ này?</Grid>
-          <Button onClick={(e) => handleCloseConfirmDialog(e)}>Hủy</Button>
-          <Button>Đồng ý</Button>
+          <Grid item>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DateTimePicker
+                fullWidth
+                label="Ngày hẹn"
+                value={appointmentTime}
+                onChange={setAppointmentTime}
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
+          <Grid>
+            <Button onClick={(e) => handleCloseConfirmDialog(e)}>Hủy</Button>
+            <Button onClick={() => handleCreateAppointment()}>Đồng ý</Button>
+          </Grid>
         </Grid>
       </DialogContent>
     </Dialog>

@@ -21,11 +21,10 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @RequiredArgsConstructor
 public class ProfileService {
-    @Autowired
-    private final UserAccountRepository userAccountRepository;
-    private final SpecialtyRepository specialtyRepository;
-    private final UserTypeRepository userTypeRepository;
-    private final CityRepository cityRepository;
+    @Autowired  private final UserAccountRepository userAccountRepository;
+    @Autowired private final SpecialtyRepository specialtyRepository;
+    @Autowired private final UserTypeRepository userTypeRepository;
+    @Autowired private final CityRepository cityRepository;
 
     public ResponseEntity<?> update(Integer userID, UserAccountDTO userAccountDTO){
         log.info(userID);

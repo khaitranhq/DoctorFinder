@@ -54,15 +54,13 @@ const CustomCard = (props) => {
   };
 
   return (
-    <div
-      className={classes.root}
-      onClick={() => setShowInformationDialog(true)}
-    >
+    <div className={classes.root}>
       <Grid
         container
         direction="row"
         alignItems="center"
         className={classes.wrapHeader}
+        onClick={() => setShowInformationDialog(true)}
       >
         <Grid item xs={2} container justify="center">
           <Avatar

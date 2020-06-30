@@ -1,13 +1,14 @@
 package com.leoaslan.docfind.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name="DetailAppointment")
@@ -18,11 +19,11 @@ public class DetailAppointment {
 
     @OneToOne
     @JoinColumn(name="doctorID")
-    private UserAccount doctor;
+    private @NonNull UserAccount doctor;
 
     @OneToOne
     @JoinColumn(name="patientID")
-    private UserAccount patient;
+    private @NonNull UserAccount patient;
 
-    private @NonNull Date time;
+    private @NonNull LocalDateTime appointmentTime;
 }

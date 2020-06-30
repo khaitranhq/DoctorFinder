@@ -11,7 +11,10 @@ public class LoginService {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    public Boolean validateUser(String email, String password) {
+    public Boolean validateUser(String email, String password, String token) {
+        if (token != ""){
+            
+        }
         List<Integer> listUser = userAccountRepository.findUserID(email, password);
         return listUser.size() > 0;
     }

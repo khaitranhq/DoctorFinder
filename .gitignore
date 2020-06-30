@@ -12,7 +12,7 @@ hs_err_pid*
 ##############################
 ## Maven
 ##############################
-target/
+/doctorfinder-api/target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -21,14 +21,14 @@ pom.xml.bak
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
+/doctorfinder-api/.mvn/timing.properties
+/doctorfinder-api/.mvn/wrapper/maven-wrapper.jar
 
 ##############################
 ## Gradle
 ##############################
-bin/
-build/
+/doctorfinder-api/bin/
+/doctorfinder-api/build/
 .gradle
 .gradletasknamecache
 gradle-app.setting
@@ -38,8 +38,8 @@ gradle-app.setting
 ## IntelliJ
 ##############################
 out/
-.idea/
-.idea_modules/
+/doctorfinder-api/.idea/
+/doctorfinder-api/.idea_modules/
 *.iml
 *.ipr
 *.iws

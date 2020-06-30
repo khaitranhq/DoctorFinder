@@ -1,12 +1,14 @@
 package com.leoaslan.docfind.dto;
 
-import com.leoaslan.docfind.model.Specialty;
-import com.leoaslan.docfind.model.UserType;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.Map;
 
+@Getter
+@Setter
 @Value
 public class UserAccountDTO {
     public UserAccountDTO(Map<String, Object> req){
