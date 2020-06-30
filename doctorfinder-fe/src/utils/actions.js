@@ -5,10 +5,13 @@ import {
   LOGIN_API,
 } from "./apiRequest";
 
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+
 export const getListSpecialties = async () => {
   const specialtiesRequest = await request(MASTER_SPECIALTY_API, "GET");
   const specialties = specialtiesRequest.data;
-  console.log(specialties);
   return specialties;
 };
 
@@ -18,10 +21,24 @@ export const getListCities = async () => {
 };
 
 export const login = (user) => {
+  cookie.set("token", user.token);
   return {
     type: "LOGIN",
     payload: {
-      userProfile: user,
+      user,
     },
   };
+};
+
+export const authentication = (auth) => {
+  return {
+    type: "AUTHORIZATION",
+    payload: {
+      ...auth,
+    },
+  };
+};
+
+export const logout = () => {
+  cookie.remove("token");
 };

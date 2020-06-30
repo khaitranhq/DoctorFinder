@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { withStyles } from "@material-ui/styles";
+import { connect } from "react-redux";
+import { authentication } from "../../../src/utils/actions";
 
 const styles = (theme) => ({
     root: {
@@ -10,7 +12,10 @@ const styles = (theme) => ({
 });
 
 const Layout = (props) => {
-    const { classes, children, page } = props;
+    const { classes, children, page, auth, dispatch } = props;
+
+    dispatch(authentication(auth)); 
+
     return (
         <div className={classes.root}>
             <Navbar page={page} />
@@ -20,4 +25,4 @@ const Layout = (props) => {
     );
 };
 
-export default withStyles(styles)(Layout);
+export default connect()(withStyles(styles)(Layout));

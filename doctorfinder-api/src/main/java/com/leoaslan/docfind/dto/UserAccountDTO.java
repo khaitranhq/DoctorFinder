@@ -1,5 +1,6 @@
 package com.leoaslan.docfind.dto;
 
+import com.leoaslan.docfind.model.UserAccount;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;

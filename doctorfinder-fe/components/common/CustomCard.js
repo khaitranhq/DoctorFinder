@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { withStyles } from "@material-ui/styles";
-import { Grid, Avatar, Button } from "@material-ui/core";
+import { Grid, Avatar, Button, Typography, Dialog, DialogContent } from "@material-ui/core";
 import { Home, Phone, Email } from "@material-ui/icons";
-import clsx from "clsx";
+import { connect } from "react-redux";
 import ProfileDialog from "../searchPage/Elements/ProfileDialog";
 import ConfirmDialog from "../searchPage/Elements/ConfirmDialog";
 
@@ -42,15 +42,28 @@ const styles = (theme) => ({
 });
 
 const CustomCard = (props) => {
-  const { classes, doctor } = props;
+  const { classes, doctor, isLoggedIn } = props;
 
   const [showInformationDialog, setShowInformationDialog] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [showLoginWarningDialog, setShowLoginWarningDialog] = useState(false);
 
   const handleShowConfirmDialog = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!isLoggedIn) {
+      setShowLoginWarningDialog(true);
+      return;
+    }
     setShowConfirmDialog(true);
+  };
+
+  const handleCloseLoginWarningDialog = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setShowLoginWarningDialog(false);
   };
 
   return (
@@ -121,9 +134,22 @@ const CustomCard = (props) => {
       <ConfirmDialog
         showConfirmDialog={showConfirmDialog}
         setShowConfirmDialog={setShowConfirmDialog}
+        doctor={doctor}
       />
+
+      <Dialog open={showLoginWarningDialog}>
+        <DialogContent>
+          <Typography>Bạn cẩn phải đăng nhập!!</Typography>
+          <Button onClick={(e) => handleCloseLoginWarningDialog(e)}>OK</Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
-export default withStyles(styles)(CustomCard);
+const mapStateToProps = (state) => {
+  const { userProfile, isLoggedIn } = state;
+  return { userProfile, isLoggedIn };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(CustomCard));

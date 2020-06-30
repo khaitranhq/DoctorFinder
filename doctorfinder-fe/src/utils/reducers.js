@@ -1,21 +1,26 @@
+import Cookies from "universal-cookie";
+
+const cookie = new Cookies();
+
 export const initialState = {
-  auth: {
-    isLogin: false,
-  },
+  isLoggedIn: false,
   userProfile: {},
 };
 
 export const Reducers = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case "LOGIN": 
-      const { userProfile } = action.payload;
+    case "LOGIN":
       return {
         ...state,
-        auth: {
-          isLogin: true
-        },
-        userProfile
-      }
+        isLoggedIn: true,
+        userProfile: action.payload,
+      };
+    case "AUTHORIZATION":
+      return {
+        ...state,
+        isLoggedIn: action.payload.isLoggedIn,
+        userProfile: action.payload.userProfile,
+      };
     default:
       return state;
   }

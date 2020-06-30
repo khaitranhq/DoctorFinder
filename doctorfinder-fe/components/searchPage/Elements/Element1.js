@@ -70,14 +70,6 @@ const Element1 = (props) => {
   const [specialties, setSpecialties] = useState([]);
   const [cities, setCities] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setSpecialties(await getListSpecialties());
-      setCities(await getListCities());
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className={classes.root}>
       <img src="../../../static/images/download.png" className={classes.img} />

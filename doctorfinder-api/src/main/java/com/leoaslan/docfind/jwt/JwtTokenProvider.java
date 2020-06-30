@@ -11,7 +11,7 @@ import java.util.Date;
 @Slf4j
 public class JwtTokenProvider {
     private final String JWT_SECRET = "seCret";
-    private final long JWT_EXPIRATION = 6000L;
+    private final long JWT_EXPIRATION = 604800000L;
 
     public String generateToken(UserAccount userAccount) {
         Date now = new Date();
@@ -24,13 +24,13 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public Long getUserIDFromToken(String token) {
+    public Integer getUserIDFromToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(JWT_SECRET)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        return Integer.parseInt(claims.getSubject());
     }
 
     public boolean validateToken(String authToken) {

@@ -133,6 +133,8 @@ class SignIn extends React.Component {
           password: this.state.password,
         });
 
+        console.log(response.data);
+
         dispatch(login(response.data));
 
         Router.push("/");
@@ -252,4 +254,12 @@ class SignIn extends React.Component {
   }
 }
 
-export default connect()(withStyles(useStyles)(SignIn));
+const mapStateToProps = (state) => {
+  const { auth, userProfile } = state;
+  return {
+    auth,
+    userProfile,
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(useStyles)(SignIn));

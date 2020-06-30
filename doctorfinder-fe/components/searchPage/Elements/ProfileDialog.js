@@ -7,6 +7,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+import moment from "moment";
 
 const ProfileDialog = (props) => {
   const { doctor, showInformationDialog, setShowInformationDialog } = props;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import BasicInformation from "./basicInformation";
-import ContactInformation from "./contactInformation";
-import DetailInformation from "./detailInformation";
+import BasicInformation from "./components/basicInformation";
+import ContactInformation from "./components/contactInformation";
+import DetailInformation from "./components/detailInformation";
 import {
   Dialog,
   TextField,

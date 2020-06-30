@@ -6,14 +6,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@RestController     
+@RestController
+@RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
     private final Logger log = LoggerFactory.getLogger(LoginController.class);
@@ -23,12 +21,12 @@ public class LoginController {
 
     @PostMapping("/login")
     ResponseEntity<?> login(@RequestBody Map<String, Object> req) {
+        if (req.containsKey("token"))
+            return loginService.validateUser((String) req.get("token"));
+
         String email = (String) req.get("email");
         String password = (String) req.get("password");
 
-        Boolean isCorrectUser = loginService.validateUser(email, password);
-        if (isCorrectUser)
-            return new ResponseEntity<>(HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return loginService.validateUser(email, password);
     }
 }
