@@ -22,7 +22,6 @@ const styles = (theme) => ({
 
 const Schedule = (props) => {
   const { classes, appointments } = props;
-  console.log(appointments);
   return (
     <div>
       <label className={classes.title}>Lịch hẹn</label>

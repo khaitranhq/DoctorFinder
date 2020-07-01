@@ -7,6 +7,7 @@ import {
 } from "./apiRequest";
 
 import { setCookie } from "./cookies";
+import jwtDecode from "jwt-decode";
 
 export const getListSpecialties = async () => {
   const specialtiesRequest = await request(MASTER_SPECIALTY_API, "GET");
@@ -20,9 +21,8 @@ export const getListCities = async () => {
 };
 
 export const login = (user) => {
-  setCookie("token", user.token);
   return {
-    type: "LOGIN",
+    type: "AUTHENTICATE",
     payload: {
       user,
     },
@@ -36,10 +36,6 @@ export const authentication = (auth) => {
       ...auth,
     },
   };
-};
-
-export const logout = () => {
-  cookie.remove("token");
 };
 
 export const saveSpecialties = (specialties) => {
@@ -84,4 +80,37 @@ export const deleteAppointment = async (appointmentID) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const validateState = (authState) => {
+  return (dispatch) => {
+    const decoded = jwtDecode(authState.userProfile.token);
+    if (decoded.exp < new Date().getTime() / 1000) {
+      dispatch(logout());
+    } else {
+      dispatch(restoreState(authState));
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch(deAuthenticateAction());
+    Router.push("/auth/signin");
+    //Flush current state after logout
+    if (location) location.reload();
+  };
+};
+
+export const restoreState = (authState) => {
+  return {
+    type: "RESTORE_AUTH_STATE",
+    payload: authState,
+  };
+};
+
+export const deAuthenticateAction = () => {
+  return {
+    type: "DEAUTHENTICATE",
+  };
 };

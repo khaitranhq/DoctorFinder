@@ -12,9 +12,7 @@ const styles = (theme) => ({
 });
 
 const Layout = (props) => {
-  const { classes, children, page, auth, dispatch } = props;
-
-  dispatch(authentication(auth));
+  const { classes, children, page } = props;
 
   return (
     <div className={classes.root}>

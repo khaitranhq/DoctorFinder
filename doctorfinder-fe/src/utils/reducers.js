@@ -1,3 +1,5 @@
+import { removeCookie, setCookie } from "./cookies";
+
 export const initialState = {
   isLoggedIn: false,
   userProfile: {},
@@ -8,18 +10,6 @@ export const initialState = {
 
 export const Reducers = (state = { ...initialState }, action) => {
   switch (action.type) {
-    case "LOGIN":
-      return {
-        ...state,
-        isLoggedIn: true,
-        userProfile: action.payload,
-      };
-    case "AUTHORIZATION":
-      return {
-        ...state,
-        isLoggedIn: action.payload.isLoggedIn,
-        userProfile: action.payload.userProfile,
-      };
     case "SAVE_SPECIALTIES":
       return {
         ...state,
@@ -44,6 +34,29 @@ export const Reducers = (state = { ...initialState }, action) => {
       return {
         ...state,
         appointments: newAppointments,
+      };
+    case "DEAUTHENTICATE":
+      removeCookie("auth");
+      removeCookie("token");
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    case "AUTHENTICATE":
+      const authObj = {
+        ...state,
+        isLoggedIn: true,
+        userProfile: action.payload.user,
+      };
+
+      setCookie("auth", authObj);
+      setCookie("token", authObj.userProfile.token);
+      return authObj;
+    case "RESTORE_AUTH_STATE":
+      return {
+        ...state,
+        isLoggedIn: action.payload.isLoggedIn,
+        userProfile: action.payload.userProfile,
       };
     default:
       return state;
