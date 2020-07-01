@@ -6,6 +6,7 @@ export const initialState = {
   specialties: [],
   cities: [],
   appointments: [],
+  listDoctors: [],
 };
 
 export const Reducers = (state = { ...initialState }, action) => {
@@ -19,6 +20,11 @@ export const Reducers = (state = { ...initialState }, action) => {
       return {
         ...state,
         cities: action.payload.cities,
+      };
+    case "SAVE_LIST_DOCTORS":
+      return {
+        ...state,
+        listDoctors: action.payload.listDoctors,
       };
     case "SAVE_APPOINTMENTS":
       return {

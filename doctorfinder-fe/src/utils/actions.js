@@ -56,6 +56,15 @@ export const saveCities = (cities) => {
   };
 };
 
+export const saveListDoctor = (listDoctors) => {
+  return {
+    type: "SAVE_LIST_DOCTORS",
+    payload: {
+      listDoctors,
+    },
+  };
+};
+
 export const saveAppointments = (appointments) => {
   return {
     type: "SAVE_APPOINTMENTS",
@@ -95,8 +104,7 @@ export const validateState = (authState) => {
 
 export const logout = () => {
   return async (dispatch) => {
-    dispatch(deAuthenticateAction());
-    Router.push("/auth/signin");
+    await dispatch(deAuthenticateAction());
     //Flush current state after logout
     if (location) location.reload();
   };

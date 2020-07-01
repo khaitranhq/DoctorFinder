@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Grid, Avatar, Button, Dialog, Typography } from "@material-ui/core";
+import {
+  Grid,
+  Avatar,
+  Button,
+  Dialog,
+  Typography,
+  DialogContent,
+  DialogTitle,
+} from "@material-ui/core";
 import { Phone, Email, Home, DateRange } from "@material-ui/icons";
 import { withStyles } from "@material-ui/styles";
 import { connect } from "react-redux";
@@ -43,6 +51,9 @@ const styles = (theme) => ({
     paddingRight: 25,
     margin: "10px 0px 25px 0px",
   },
+  dialog: {
+    padding: "15px 20px",
+  },
 });
 
 const AppointmentCard = (props) => {
@@ -51,7 +62,7 @@ const AppointmentCard = (props) => {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   const user =
-    userProfile.userTypeID === 1 ? appointment.patient : appointment.doctor;
+    userProfile.userType.userTypeID === 1 ? appointment.patient : appointment.doctor;
 
   const time = moment(appointment.appointmentTime).format(
     "DD-MM-YYYY hh:mm:ss"
@@ -126,11 +137,23 @@ const AppointmentCard = (props) => {
         open={showConfirmDialog}
         onClose={() => setShowConfirmDialog(false)}
       >
-        <Typography>Bạn muốn hủy cuộc hẹn này?</Typography>
-        <Grid container justify="center" alignItems="center">
-          <Button onClick={() => handleDeleteAppointment()}>Đồng ý</Button>
-          <Button onClick={() => setShowConfirmDialog(false)}>Hủy</Button>
-        </Grid>
+        <div className={classes.dialog}>
+          <DialogTitle>
+            <Typography>Bạn muốn hủy cuộc hẹn này?</Typography>
+          </DialogTitle>
+          <DialogContent>
+            <Grid container alignItems="center">
+              <Grid item container justify="center" xs={6}>
+                <Button onClick={() => handleDeleteAppointment()}>
+                  Đồng ý
+                </Button>
+              </Grid>
+              <Grid item justify="center" container xs={6}>
+                <Button onClick={() => setShowConfirmDialog(false)}>Hủy</Button>
+              </Grid>
+            </Grid>
+          </DialogContent>
+        </div>
       </Dialog>
     </div>
   );

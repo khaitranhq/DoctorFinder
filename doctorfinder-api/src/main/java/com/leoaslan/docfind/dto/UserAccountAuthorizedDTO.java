@@ -1,6 +1,9 @@
 package com.leoaslan.docfind.dto;
 
+import com.leoaslan.docfind.model.City;
+import com.leoaslan.docfind.model.Specialty;
 import com.leoaslan.docfind.model.UserAccount;
+import com.leoaslan.docfind.model.UserType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,14 +16,14 @@ public class UserAccountAuthorizedDTO {
     String email;
     String password;
     String fullName;
-    int userTypeID;
-    int cityID;
+    UserType userType;
+    City city;
     LocalDate birthday;
     String avatarFileName;
     int phoneNumber;
     String detailAddress;
     Boolean gender;
-    int specialtyID;
+    Specialty specialty;
 
     //For doctor
     public UserAccountAuthorizedDTO(UserAccount userAccount, String token) {
@@ -28,8 +31,8 @@ public class UserAccountAuthorizedDTO {
         this.email = userAccount.getEmail();
         this.password = userAccount.getPassword();
         this.fullName = userAccount.getFullName();
-        this.userTypeID = userAccount.getUserType().getUserTypeID();
-        this.cityID = userAccount.getCity().getCityID();
+        this.userType = userAccount.getUserType();
+        this.city = userAccount.getCity();
         this.birthday = userAccount.getBirthday();
         this.avatarFileName = userAccount.getAvatarFileName();
         this.phoneNumber = userAccount.getPhoneNumber();
@@ -37,7 +40,7 @@ public class UserAccountAuthorizedDTO {
         this.gender = userAccount.getGender();
 
         if (userAccount.getSpecialty() != null)
-            this.specialtyID = userAccount.getSpecialty().getSpecialtyID();
+            this.specialty = userAccount.getSpecialty();
         this.token = token;
     }
 

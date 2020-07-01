@@ -14,7 +14,6 @@ import {
 } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import Router from "next/router";
-import { useAuth } from "../../../hoc/useAuth";
 import { connect } from "react-redux";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { logout } from "../../../../src/utils/actions";

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Grid, withStyles, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { getListSpecialties, getListCities } from "../../../src/utils/actions";
+import { getListSpecialties, getListCities, saveListDoctor } from "../../../src/utils/actions";
 import { connect } from "react-redux";
+import { request, DOCTORS_API } from "../../../src/utils/apiRequest";
 
 const styles = (theme) => ({
   root: {
@@ -62,11 +63,25 @@ const styles = (theme) => ({
 });
 
 const Element1 = (props) => {
-  const { classes, onSubmit, specialties, cities } = props;
+  const { classes, specialties, cities, dispatch } = props;
   
   const [doctorSpecialty, setDoctorSpecialty] = useState("");
   const [doctorCity, setDoctorCity] = useState("");
   const [doctorName, setDoctorName] = useState("");
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    try {
+      const listDoctors = await request(DOCTORS_API, "post", {
+        specialtyID: doctorSpecialty.specialtyID,
+        cityID: doctorCity.cityID,
+        fullName: doctorName,
+      });
+      await dispatch(saveListDoctor(listDoctors.data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -153,7 +168,7 @@ const Element1 = (props) => {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => onSubmit(doctorSpecialty, doctorCity, doctorName)}
+              onClick={(e) => handleSubmit(e)}
               className={classes.btn}
             >
               Tìm kiếm

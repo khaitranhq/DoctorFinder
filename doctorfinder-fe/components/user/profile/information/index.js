@@ -10,6 +10,9 @@ import {
   Select,
   MenuItem,
   Button,
+  DialogTitle,
+  DialogContent,
+  Grid,
 } from "@material-ui/core";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
@@ -20,8 +23,11 @@ import { withStyles } from "@material-ui/styles";
 const styles = (theme) => ({
   root: {
     marginLeft: 87,
-    padding: theme.spacing(0, 6)
-  }
+    padding: theme.spacing(0, 6),
+  },
+  input: {
+    margin: "10px 0px",
+  },
 });
 
 const Information = (props) => {
@@ -77,84 +83,96 @@ const Information = (props) => {
       <ContactInformation userProfile={userProfile} />
       <DetailInformation userProfile={userProfile} />
       <Dialog open={showPopup} onClose={() => setShowPopup(false)}>
-        <label>Chỉnh sửa thông tin cá nhân</label>
-        <TextField
-          label="Họ và tên"
-          value={userProfile.fullName}
-          onChange={(e) => handleChange("fullName", e.target.value)}
-        />
+        <DialogTitle>
+          <label>Chỉnh sửa thông tin cá nhân</label>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container direction="column">
+            <TextField
+              label="Họ và tên"
+              value={userProfile.fullName}
+              onChange={(e) => handleChange("fullName", e.target.value)}
+              className={classes.input}
+            />
 
-        <FormControl>
-          <InputLabel>Giới tính</InputLabel>
-          <Select
-            value={userProfile.gender}
-            onChange={(e) => handleChange("gender", e.target.value)}
-          >
-            <MenuItem value={true}>Nam</MenuItem>
-            <MenuItem value={false}>Nữ</MenuItem>
-          </Select>
-        </FormControl>
+            <FormControl className={classes.input}>
+              <InputLabel>Giới tính</InputLabel>
+              <Select
+                value={userProfile.gender}
+                onChange={(e) => handleChange("gender", e.target.value)}
+              >
+                <MenuItem value={true}>Nam</MenuItem>
+                <MenuItem value={false}>Nữ</MenuItem>
+              </Select>
+            </FormControl>
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <DatePicker
-            label="Sinh nhật"
-            value={userProfile.birthday}
-            onChange={(date) => handleChange("birthday", date)}
-            renderInput={(props) => <TextField {...props} />}
-          />
-        </MuiPickersUtilsProvider>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                label="Sinh nhật"
+                value={userProfile.birthday}
+                onChange={(date) => handleChange("birthday", date)}
+                renderInput={(props) => <TextField {...props} />}
+                className={classes.input}
+              />
+            </MuiPickersUtilsProvider>
 
-        <TextField
-          label="Email"
-          value={userProfile.email}
-          onChange={(e) => handleChange("email", e.target.value)}
-        />
-        <TextField
-          label="Số điện thoại"
-          value={userProfile.phoneNumber}
-          onChange={(e) => handleChange("phoneNumber", e.target.value)}
-        />
-        <TextField
-          label="Mật khẩu"
-          type="password"
-          value={userProfile.password}
-          onChange={(e) => handleChange("password", e.target.value)}
-        />
-        <FormControl>
-          <InputLabel>Thành phố</InputLabel>
-          <Select
-            value={userProfile.city.cityID}
-            onChange={(e) => handleChange("city", e.target.value)}
-          >
-            {cities.map((city, key) => (
-              <MenuItem key={key} value={city.cityID}>
-                {city.cityName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          label="Địa chỉ cụ thể"
-          value={userProfile.detailAddress}
-          onChange={(e) => handleChange("detailAddress", e.target.value)}
-        />
+            <TextField
+              label="Email"
+              value={userProfile.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className={classes.input}
+            />
+            <TextField
+              className={classes.input}
+              label="Số điện thoại"
+              value={userProfile.phoneNumber}
+              onChange={(e) => handleChange("phoneNumber", e.target.value)}
+            />
+            <TextField
+              className={classes.input}
+              label="Mật khẩu"
+              type="password"
+              value={userProfile.password}
+              onChange={(e) => handleChange("password", e.target.value)}
+            />
+            <FormControl className={classes.input}>
+              <InputLabel>Thành phố</InputLabel>
+              <Select
+                value={userProfile.city.cityID}
+                onChange={(e) => handleChange("city", e.target.value)}
+              >
+                {cities.map((city, key) => (
+                  <MenuItem key={key} value={city.cityID}>
+                    {city.cityName}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              className={classes.input}
+              label="Địa chỉ cụ thể"
+              value={userProfile.detailAddress}
+              onChange={(e) => handleChange("detailAddress", e.target.value)}
+            />
 
-        {userProfile.specialty && (
-          <FormControl>
-            <InputLabel>Chuyên khoa</InputLabel>
-            <Select
-              value={userProfile.specialty.specialtyID}
-              onChange={(e) => handleChange("specialty", e.target.value)}
-            >
-              {specialties.map((specialty, key) => (
-                <MenuItem key={key} value={specialty.specialtyID}>
-                  {specialty.specialtyName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        )}
-        <Button onClick={() => handleSubmit()}>Chấp nhận</Button>
+            {userProfile.specialty && (
+              <FormControl className={classes.input}>
+                <InputLabel>Chuyên khoa</InputLabel>
+                <Select
+                  value={userProfile.specialty.specialtyID}
+                  onChange={(e) => handleChange("specialty", e.target.value)}
+                >
+                  {specialties.map((specialty, key) => (
+                    <MenuItem key={key} value={specialty.specialtyID}>
+                      {specialty.specialtyName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
+            <Button onClick={() => handleSubmit()}>Chấp nhận</Button>
+          </Grid>
+        </DialogContent>
       </Dialog>
     </div>
   );

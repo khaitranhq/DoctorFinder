@@ -10,7 +10,7 @@ import {
   CardActionArea,
 } from "@material-ui/core";
 import CustomCard from "../../common/CustomCard";
-import { Label } from "@material-ui/icons";
+import { connect } from "react-redux";
 
 const styles = (theme) => ({
   wrapCards: {
@@ -34,27 +34,11 @@ const styles = (theme) => ({
 
 const Element2 = (props) => {
   const { classes } = props;
-
-  const listDoctor = [
-    {
-      avatarFileName: "doctor1.png",
-      birthday: "2000-07-05",
-      city: { cityID: 1, cityName: "Hà Nội" },
-      detailAddress: "17 Phần Lăng 15, Hải Châu, Đà Nẵng",
-      email: "doctor1@gmail.com",
-      fullName: "Bác sĩ Khải",
-      gender: true,
-      password: "123",
-      phoneNumber: 889112834,
-      specialty: { specialtyID: 1, specialtyName: "Khoa Thần Kinh" },
-      userID: 1,
-      userType: { userTypeID: 1, userTypeName: "Doctor" },
-    },
-  ];
+  const listDoctors = props.listDoctors ? props.listDoctors : [];
 
   return (
     <Grid className={classes.root}>
-      {listDoctor.length === 0 ? (
+      {listDoctors.length === 0 ? (
         <Grid
           container
           alignItems="center"
@@ -74,7 +58,7 @@ const Element2 = (props) => {
           className={classes.wrapCards}
           spacing={3}
         >
-          {listDoctor.map((doctor, key) => (
+          {listDoctors.map((doctor, key) => (
             <Grid
               item
               container
@@ -92,4 +76,9 @@ const Element2 = (props) => {
   );
 };
 
-export default withStyles(styles)(Element2);
+const mapStateToProps = (state) => {
+  const { listDoctors } = state;
+  return { listDoctors };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Element2));

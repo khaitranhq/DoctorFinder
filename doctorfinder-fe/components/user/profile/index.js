@@ -14,11 +14,7 @@ const styles = (theme) => ({
 });
 
 const Profile = (props) => {
-  const { classes,  cities, specialties, dispatch, appointments } = props;
-
-  dispatch(saveSpecialties(specialties));
-  dispatch(saveCities(cities));
-  dispatch(saveAppointments(appointments));
+  const { classes } = props;
 
   return (
     <Grid container className={classes.root} spacing={2}>
