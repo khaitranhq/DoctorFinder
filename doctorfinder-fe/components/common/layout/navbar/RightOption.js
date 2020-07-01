@@ -17,6 +17,7 @@ import Router from "next/router";
 import { connect } from "react-redux";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { logout } from "../../../../src/utils/actions";
+import clsx from "clsx";
 
 const styles = (theme) => ({
   rightOption: {
@@ -81,6 +82,9 @@ const styles = (theme) => ({
       backgroundColor: "#EBEBF2",
     },
   },
+  marginRight: {
+    marginRight: 29,
+  },
 });
 
 const RightOption = (props) => {
@@ -126,7 +130,7 @@ const RightOption = (props) => {
             display="flex"
             flexDirection="row"
             alignItems="center"
-            className={classes.rightOption}
+            className={clsx(classes.rightOption, classes.marginRight)}
           >
             <Typography className={classes.fullName}>
               {userProfile.fullName}
