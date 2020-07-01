@@ -3,11 +3,10 @@ import {
   MASTER_SPECIALTY_API,
   MASTER_CITY_API,
   LOGIN_API,
+  APPOINTMENT_API,
 } from "./apiRequest";
 
-import Cookies from "universal-cookie";
-
-const cookie = new Cookies();
+import { setCookie } from "./cookies";
 
 export const getListSpecialties = async () => {
   const specialtiesRequest = await request(MASTER_SPECIALTY_API, "GET");
@@ -21,7 +20,7 @@ export const getListCities = async () => {
 };
 
 export const login = (user) => {
-  cookie.set("token", user.token);
+  setCookie("token", user.token);
   return {
     type: "LOGIN",
     payload: {
@@ -41,4 +40,48 @@ export const authentication = (auth) => {
 
 export const logout = () => {
   cookie.remove("token");
+};
+
+export const saveSpecialties = (specialties) => {
+  return {
+    type: "SAVE_SPECIALTIES",
+    payload: {
+      specialties,
+    },
+  };
+};
+
+export const saveCities = (cities) => {
+  return {
+    type: "SAVE_CITIES",
+    payload: {
+      cities,
+    },
+  };
+};
+
+export const saveAppointments = (appointments) => {
+  return {
+    type: "SAVE_APPOINTMENTS",
+    payload: {
+      appointments,
+    },
+  };
+};
+
+export const deleteAppointment = async (appointmentID) => {
+  try {
+    const response = await request(
+      APPOINTMENT_API + `/${appointmentID}`,
+      "delete"
+    );
+    return {
+      type: "DELETE_APPOINTMENT",
+      payload: {
+        appointmentID,
+      },
+    };
+  } catch (err) {
+    console.log(err);
+  }
 };

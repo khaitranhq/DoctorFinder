@@ -3,24 +3,27 @@ import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import Information from "./information";
 import Schedule from "./schedule";
+import { connect } from "react-redux";
+import { saveSpecialties, saveCities, saveAppointments } from "../../../src/utils/actions";
 
 const styles = (theme) => ({
   root: {
     marginTop: 60,
-    padding: "40px 50px",
+    padding: "40px 0px",
   },
 });
 
 const Profile = (props) => {
-  const { classes, userProfile, cities, specialties } = props;
+  const { classes,  cities, specialties, dispatch, appointments } = props;
+
+  dispatch(saveSpecialties(specialties));
+  dispatch(saveCities(cities));
+  dispatch(saveAppointments(appointments));
+
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={3}>
-        <Information
-          userProfile={userProfile}
-          cities={cities}
-          specialties={specialties}
-        />
+        <Information />
       </Grid>
       <Grid item xs={9}>
         <Schedule />
@@ -29,4 +32,4 @@ const Profile = (props) => {
   );
 };
 
-export default withStyles(styles)(Profile);
+export default connect()(withStyles(styles)(Profile));

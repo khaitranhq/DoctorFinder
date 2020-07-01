@@ -14,11 +14,21 @@ import {
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { request, PROFILE_API } from "../../../../src/utils/apiRequest";
+import { connect } from "react-redux";
+import { withStyles } from "@material-ui/styles";
+
+const styles = (theme) => ({
+  root: {
+    marginLeft: 87,
+    padding: theme.spacing(0, 6)
+  }
+});
 
 const Information = (props) => {
-  const { specialties, cities } = props;
+  const { specialties, cities, classes } = props;
 
   const [userProfile, setUserProfile] = useState(props.userProfile);
+
   const [showPopup, setShowPopup] = useState(false);
 
   const handleChange = (key, value) => {
@@ -48,7 +58,7 @@ const Information = (props) => {
       ...userProfile,
       cityID: userProfile.city.cityID,
       specialtyID: userProfile.specialty.specialtyID,
-      userTypeID: userProfile.userType.userTypeID
+      userTypeID: userProfile.userType.userTypeID,
     };
     try {
       await request(PROFILE_API + "/1", "put", payload);
@@ -59,7 +69,7 @@ const Information = (props) => {
   };
 
   return (
-    <div>
+    <div className={classes.root}>
       <BasicInformation
         userProfile={userProfile}
         handleShowPopup={handleShowPopup}
@@ -129,23 +139,30 @@ const Information = (props) => {
           onChange={(e) => handleChange("detailAddress", e.target.value)}
         />
 
-        <FormControl>
-          <InputLabel>Chuyên khoa</InputLabel>
-          <Select
-            value={userProfile.specialty.specialtyID}
-            onChange={(e) => handleChange("specialty", e.target.value)}
-          >
-            {specialties.map((specialty, key) => (
-              <MenuItem key={key} value={specialty.specialtyID}>
-                {specialty.specialtyName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {userProfile.specialty && (
+          <FormControl>
+            <InputLabel>Chuyên khoa</InputLabel>
+            <Select
+              value={userProfile.specialty.specialtyID}
+              onChange={(e) => handleChange("specialty", e.target.value)}
+            >
+              {specialties.map((specialty, key) => (
+                <MenuItem key={key} value={specialty.specialtyID}>
+                  {specialty.specialtyName}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
         <Button onClick={() => handleSubmit()}>Chấp nhận</Button>
       </Dialog>
     </div>
   );
 };
 
-export default Information;
+const mapStateToProps = (state) => {
+  const { userProfile, specialties, cities } = state;
+  return { userProfile, specialties, cities };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Information));

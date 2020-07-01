@@ -9,6 +9,8 @@ import {
   Typography,
   IconButton,
   Collapse,
+  Grid,
+  ClickAwayListener,
 } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import Router from "next/router";
@@ -21,7 +23,13 @@ const styles = (theme) => ({
   rightOption: {
     position: "absolute",
     height: "100%",
+    width: "auto",
     right: 0,
+  },
+  fullName: {
+    fontSize: 17,
+    fontFamily: "Roboto",
+    color: "#575757",
   },
   signupBtn: {
     padding: "0px 15px",
@@ -55,6 +63,25 @@ const styles = (theme) => ({
       fontSize: 10,
     },
   },
+  menuProfile: {
+    position: "fixed",
+    top: 60,
+    backgroundColor: "#FFF",
+    borderLeft: "1px solid #EBEBF2",
+    borderBottom: "1px solid #EBEBF2",
+    borderRight: "1px solid #EBEBF2",
+  },
+  itemMenuProfile: {
+    width: "100%",
+    fontSize: 14,
+    display: "block",
+    textAlign: "left",
+    padding: theme.spacing(2, 2),
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "#EBEBF2",
+    },
+  },
 });
 
 const RightOption = (props) => {
@@ -62,17 +89,19 @@ const RightOption = (props) => {
 
   const [showMenuProfile, setShowMenuProfile] = useState(false);
 
-  console.log(userProfile);
+  const handleClickAway = () => {
+    setShowMenuProfile(false);
+  };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      alignItems="center"
-      className={classes.rightOption}
-    >
+    <div>
       {!isLoggedIn ? (
-        <Box>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          className={classes.rightOption}
+        >
           <ButtonBase
             className={classes.signupBtn}
             onClick={() => Router.push("/auth/signup")}
@@ -92,27 +121,41 @@ const RightOption = (props) => {
           </Link>
         </Box>
       ) : (
-        <Box onClick={() => setShowMenuProfile(true)}>
-          <Typography>{userProfile.fullName}</Typography>
-          <ArrowDropDownIcon />
-          <Collapse in={showMenuProfile}>
-            <ButtonBase
-              onClick={() => Router.push(`/user/${userProfile.userID}`)}
-            >
-              Hồ sơ
-            </ButtonBase>
-            <ButtonBase
-              onClick={() => {
-                logout();
-                Router.push("/auth/signin");
-              }}
-            >
-              Đăng xuất
-            </ButtonBase>
-          </Collapse>
-        </Box>
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <Box
+            onClick={() => setShowMenuProfile(!showMenuProfile)}
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            className={classes.rightOption}
+          >
+            <Typography className={classes.fullName}>
+              {userProfile.fullName}
+            </Typography>
+            <ArrowDropDownIcon />
+            <Collapse in={showMenuProfile} className={classes.menuProfile}>
+              <Grid container direction="column">
+                <ButtonBase
+                  onClick={() => Router.push(`/user/${userProfile.userID}`)}
+                  className={classes.itemMenuProfile}
+                >
+                  Hồ sơ
+                </ButtonBase>
+                <ButtonBase
+                  className={classes.itemMenuProfile}
+                  onClick={() => {
+                    logout();
+                    Router.push("/auth/signin");
+                  }}
+                >
+                  Đăng xuất
+                </ButtonBase>
+              </Grid>
+            </Collapse>
+          </Box>
+        </ClickAwayListener>
       )}
-    </Box>
+    </div>
   );
 };
 

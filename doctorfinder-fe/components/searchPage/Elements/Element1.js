@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, withStyles, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { getListSpecialties, getListCities } from "../../../src/utils/actions";
+import { connect } from "react-redux";
 
 const styles = (theme) => ({
   root: {
@@ -61,14 +62,11 @@ const styles = (theme) => ({
 });
 
 const Element1 = (props) => {
-  const { classes, onSubmit } = props;
-
+  const { classes, onSubmit, specialties, cities } = props;
+  
   const [doctorSpecialty, setDoctorSpecialty] = useState("");
   const [doctorCity, setDoctorCity] = useState("");
   const [doctorName, setDoctorName] = useState("");
-
-  const [specialties, setSpecialties] = useState([]);
-  const [cities, setCities] = useState([]);
 
   return (
     <div className={classes.root}>
@@ -167,6 +165,9 @@ const Element1 = (props) => {
   );
 };
 
-Element1.getInitialProps = async (ctx) => {};
+const mapStateToProps = (state) => {
+  const { specialties, cities } = state;
+  return { specialties, cities };
+};
 
-export default withStyles(styles)(Element1);
+export default connect(mapStateToProps)(withStyles(styles)(Element1));

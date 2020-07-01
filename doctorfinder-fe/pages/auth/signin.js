@@ -133,8 +133,6 @@ class SignIn extends React.Component {
           password: this.state.password,
         });
 
-        console.log(response.data);
-
         dispatch(login(response.data));
 
         Router.push("/");
